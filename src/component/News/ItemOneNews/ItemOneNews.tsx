@@ -1,13 +1,13 @@
 import React, {FC} from 'react';
 import './itemonenews.css'
-import {INews} from "../../../../store/news/types";
-import {AppDispatch} from "../../../../store/store";
-import {_url} from "../../../../service/api";
+import {INews} from "../../../store/news/types";
+import {AppDispatch} from "../../../store/store";
+import {_url} from "../../../service/api";
 import {NavLink} from "react-router-dom";
 import moment from "moment";
 import {BiLike} from "react-icons/bi";
 import {GrView} from "react-icons/gr";
-import {likesNews} from "../../../../store/news/newsAction";
+import {likesNews} from "../../../store/news/newsAction";
 
 interface Props {
     item: INews

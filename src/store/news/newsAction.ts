@@ -36,9 +36,9 @@ export const getOneNewsAction = createAsyncThunk<INews, string, { rejectValue: K
 )
 
 export const getNewsByUserIdAction = createAsyncThunk<IGetNewsByUser, IByUserId, { rejectValue: KnowError }>(
-    'news/getOneNewsByUserId', async ({userId, token, page}, {rejectWithValue}) => {
+    'news/getOneNewsByUserId', async ({userId, page}, {rejectWithValue}) => {
         try {
-            const {data} = await api.get_news_by_user_id({userId, token, page})
+            const {data} = await api.get_news_by_user_id({userId, page})
             return data
         } catch (err: any) {
             const error = err.request.response.replace(/['"{}]+/g, '')

@@ -4,18 +4,15 @@ import {FaAddressCard} from 'react-icons/fa'
 import {ImNewspaper} from 'react-icons/im'
 import {TbNews} from 'react-icons/tb'
 import './sidebar.css'
-import {Link} from 'react-router-dom'
-import {getAllNewsAction} from "../../../store/news/newsAction";
-import {useTypeDispatch, useTypeSelector} from "../../../store/store";
+import {Link, useNavigate} from 'react-router-dom'
+import {useTypeSelector} from "../../../store/store";
 import {selectorUser} from "../../../store/user/userSlice";
 
 
 const SideBar: FC = () => {
     const {user} = useTypeSelector(selectorUser)
-
     const [isShow, setIsShow] = useState<boolean>(false)
-    const dispatch = useTypeDispatch()
-
+    const navigate = useNavigate()
     return (
         <div className='sideBarContainer'>
             {isShow ?
@@ -25,7 +22,7 @@ const SideBar: FC = () => {
                             onClick={() => setIsShow(false)}
                         />
                     </div>
-                    <div onClick={() => dispatch(getAllNewsAction(1))}>
+                    <div onClick={() => navigate('/')}>
                         <Link className='styleIconMenu' to={'/'}><TbNews/></Link>
                     </div>
                     {user &&
@@ -45,7 +42,7 @@ const SideBar: FC = () => {
                     <div className='trigger'>
                         <AiOutlineMenuFold onClick={() => setIsShow(true)}/>
                     </div>
-                    <Link className='linkText' to={'/'} onClick={() => dispatch(getAllNewsAction(1))}>
+                    <Link className='linkText' to={'/'} onClick={() => navigate('/')}>
                         <span>All News</span>
                         <span className='linkTextIconsStyle'><TbNews/></span>
                     </Link>

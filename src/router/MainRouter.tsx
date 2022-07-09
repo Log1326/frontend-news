@@ -3,21 +3,19 @@ import {toast, ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import './mainrouter.css'
 import {Route, Routes} from 'react-router-dom'
-import {Login, Registration} from "../pages/Auth";
-import {Footer, Header} from "../component";
-import {AddNews, AllNews, MyNews, NewsOneById, UpdateNews} from "../component/News";
 import {useTypeDispatch, useTypeSelector} from "../store/store";
 import {get_current_user} from "../store/user/userAction";
 import {selectorUser} from "../store/user/userSlice";
-import Layout from "../component/Layout/Layout";
+import {Login, Registration} from "../pages/Auth";
+import {Footer, Header, Layout} from "../component";
+import {AddNews, AllNews, MyNews, NewsOneById, UpdateNews} from '../pages/index'
 
 const MainRouter: FC = () => {
     const {user, error} = useTypeSelector(selectorUser)
     const dispatch = useTypeDispatch()
-    const token = localStorage.getItem('token')
     useEffect(() => {
-        token && dispatch(get_current_user(token))
-    }, [token])
+        dispatch(get_current_user())
+    }, [])
     useEffect(() => {
         error && toast.error(error + ' //auth')
     }, [error])

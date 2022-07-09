@@ -1,16 +1,16 @@
 import React, {FC, useEffect} from 'react';
-import {useTypeDispatch, useTypeSelector} from "../../../store/store";
-import {getAllNewsAction} from "../../../store/news/newsAction";
-import {selectorAllNews, selectorOptions, setCurrentPage} from "../../../store/news/newsSlice";
+import {useTypeDispatch, useTypeSelector} from "../../store/store";
+import {getAllNewsAction} from "../../store/news/newsAction";
+import {selectorAllNews, selectorOptions, setCurrentPage} from "../../store/news/newsSlice";
 import {toast} from "react-toastify";
-import NewsItems from "./NewsItems/NewsItems";
-import {SkeletonLoad} from "../../../ui/LoadingUI";
+import NewsItems from "../../component/News/NewsItems/NewsItems";
+import {SkeletonLoad} from "../../ui/LoadingUI";
 import {useLocation, useNavigate} from "react-router-dom";
-import {useQuery} from "../../../utils";
-import {NoNews, Pagination} from "../../../ui";
+import {useQuery} from "../../utils";
+import {NoNews, Pagination} from "../../ui";
 import './allnews.css'
-import {selectorAllUsers} from "../../../store/user/userSlice";
-import {get_all_users} from "../../../store/user/userAction";
+import {selectorAllUsers} from "../../store/user/userSlice";
+import {get_all_users} from "../../store/user/userAction";
 
 const AllNews: FC = () => {
     const users = useTypeSelector(selectorAllUsers)

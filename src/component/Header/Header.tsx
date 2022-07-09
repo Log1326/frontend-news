@@ -8,12 +8,12 @@ import {_url} from "../../service/api";
 import {BsPersonCircle} from "react-icons/bs";
 import {TbLogout} from 'react-icons/tb'
 import {SmallLoad} from "../../ui/LoadingUI";
-import {getAllNewsAction, searchNewsAction} from "../../store/news/newsAction";
+import {searchNewsAction} from "../../store/news/newsAction";
 
 
 const Header: FC = () => {
-    const [search, setSearch] = useState<string>('');
     const {user, status} = useTypeSelector(selectorUser)
+    const [search, setSearch] = useState<string>('');
     const dispatch = useTypeDispatch()
     const navigate = useNavigate()
     const handleSubmit = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -59,7 +59,7 @@ const Header: FC = () => {
             </div>
             <div className='linksAndSearchHeader'>
                 <NavLink className='linksHeader' to={'/'}
-                         onClick={() => dispatch(getAllNewsAction(1))}>
+                         onClick={() => navigate('/')}>
                     News
                 </NavLink>
 

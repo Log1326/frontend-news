@@ -37,18 +37,18 @@ const initialState: newsStateNews = {
         currentPage: null,
         numberOfPages: null,
         totalNews: null
-    }
+    },
 }
 const newsSlice = createSlice({
     name: 'news',
     initialState,
     reducers: {
-        setCurrentPage: (state, action: PayloadAction<number>) => {
-            state.options.currentPage = action.payload
+        setCurrentPage: ({options}, action: PayloadAction<number>) => {
+            options.currentPage = action.payload
         },
-        setCurrentPageByUser: (state, action: PayloadAction<number>) => {
-            state.userNewsById.options.currentPage = action.payload
-        }
+        setCurrentPageByUser: ({userNewsById}, action: PayloadAction<number>) => {
+            userNewsById.options.currentPage = action.payload
+        },
     },
     extraReducers: builder => {
         builder
@@ -114,7 +114,7 @@ const newsSlice = createSlice({
                         oneNewsById.items.map(item => item._id === userId ? action.payload : item)
                 }
             })
-            .addCase(likesNews.rejected, ({allNews,oneNewsById}, action) => {
+            .addCase(likesNews.rejected, ({allNews, oneNewsById}, action) => {
                 allNews.status = statusLoading.wrong
                 oneNewsById.error = String(action.payload)
                 allNews.error = String(action.payload)

@@ -3,12 +3,8 @@ import './footer.css'
 import {BsLinkedin} from 'react-icons/bs'
 import {AiFillFacebook, AiFillGithub, AiOutlineLink} from "react-icons/ai";
 import resume from './2022_CV_Pavel_Motovilov_Frontend_Web.docx'
-import {useTypeSelector} from "../../store/store";
-import {selectorUserNewsById} from "../../store/news/newsSlice";
 
 const Footer = () => {
-    const {data} = useTypeSelector(selectorUserNewsById)
-    if (data.status === 'loading') return null
     return (
         <div className='containerFooter'>
             <div className='footer2022'>© 2022 Made to demonstrate.</div>

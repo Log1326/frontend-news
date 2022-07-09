@@ -63,6 +63,8 @@ export const userSlice = createSlice({
             .addCase(get_current_user.rejected, (state, action) => {
                 state.status = statusUser.error
                 state.error = String(action.payload)
+                state.user = null
+                localStorage.clear()
             })
             .addCase(get_all_users.pending, (state) => {
                 state.status = statusUser.loading

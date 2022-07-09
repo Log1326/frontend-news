@@ -1,14 +1,14 @@
 import React, {FC, useMemo} from 'react';
-import {INews} from "../../../../store/news/types";
+import {INews} from "../../../store/news/types";
 import './newsitems.css'
 import {BiLike} from 'react-icons/bi'
 import {GrView} from 'react-icons/gr'
 import {Link, NavLink} from "react-router-dom";
-import {_url} from "../../../../service/api";
-import {AppDispatch} from "../../../../store/store";
-import {likesNews} from "../../../../store/news/newsAction";
-import {excerpt, foundUser} from "../../../../utils";
-import {IUsers} from "../../../../store/user/types";
+import {_url} from "../../../service/api";
+import {AppDispatch} from "../../../store/store";
+import {likesNews} from "../../../store/news/newsAction";
+import {excerpt, foundUser} from "../../../utils";
+import {IUsers} from "../../../store/user/types";
 
 interface Props {
     item: INews

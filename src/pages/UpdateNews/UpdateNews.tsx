@@ -1,12 +1,12 @@
 import React, {FC, useEffect} from 'react';
 import './updatenews.css'
-import {useTypeDispatch, useTypeSelector} from "../../../store/store";
-import {selectorUserNewsById} from "../../../store/news/newsSlice";
+import {useTypeDispatch, useTypeSelector} from "../../store/store";
+import {selectorUserNewsById} from "../../store/news/newsSlice";
 import {useNavigate, useParams} from "react-router-dom";
 import {SubmitHandler} from "react-hook-form";
-import {IPublishNews} from "../../../store/news/types";
-import {FormUpdate} from "../../../ui";
-import {updateNewsAction} from "../../../store/news/newsAction";
+import {IPublishNews} from "../../store/news/types";
+import {FormUpdate} from "../../ui";
+import {updateNewsAction} from "../../store/news/newsAction";
 import {toast} from "react-toastify";
 
 const UpdateNews: FC = () => {

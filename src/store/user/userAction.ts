@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import * as api from '../../service/api'
-import {IApi, IData, IUser, KnownError} from "./types";
+import {IApi, IData, KnownError} from "./types";
 
 export const sign_in = createAsyncThunk<IData, IApi, { rejectValue: KnownError }>(
     'user/sign_in',
@@ -33,16 +33,15 @@ export const sign_up = createAsyncThunk<IData, IApi, { rejectValue: KnownError }
     }
 )
 
-export const get_current_user = createAsyncThunk<IUser, string, { rejectValue: KnownError }>(
+
+export const get_current_user = createAsyncThunk(
     'user/get_current_user',
-    async (token, {rejectWithValue}) => {
+    async (_, {rejectWithValue}) => {
         try {
-            const {data} = await api.get_current_user(token)
+            const {data} = await api.get_current_user()
             return data
-        } catch (err: any) {
-            const error = err.request.response.replace(/['"{}]+/g, '')
-            console.log(err)
-            return rejectWithValue(error)
+        } catch (err) {
+            return rejectWithValue(err)
         }
     })
 

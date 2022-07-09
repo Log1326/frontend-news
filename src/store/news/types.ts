@@ -52,6 +52,11 @@ export interface IGetNewsByUser {
     options: IOptions
 }
 
+export interface IUploadFile {
+    formData: FormData,
+    setLoading?: (loading: number | null) => void
+}
+
 export interface IPublishNews {
     title: string
     description: string
@@ -67,7 +72,7 @@ export interface IDataPublish {
 
 export interface IUpdatePublish {
     newsData: IPublishNews
-    id?:string
+    id?: string
     navigate: NavigateFunction
     toast: any
 }
@@ -80,7 +85,6 @@ export interface IUpdateSend {
 
 export interface IByUserId {
     userId: string
-    token: string
     page?: number
 }
 

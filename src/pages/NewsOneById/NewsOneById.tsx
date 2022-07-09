@@ -1,11 +1,11 @@
 import React, {FC, useEffect} from 'react';
 import './newsonebyid.css'
-import {useTypeDispatch, useTypeSelector} from "../../../store/store";
-import {selectorOneNewsById} from "../../../store/news/newsSlice";
+import {useTypeDispatch, useTypeSelector} from "../../store/store";
+import {selectorOneNewsById} from "../../store/news/newsSlice";
 import {useParams} from "react-router-dom";
-import {getOneNewsAction} from "../../../store/news/newsAction";
-import ItemOneNews from "./ItemOneNews/ItemOneNews";
-import {SearchLoad} from "../../../ui/LoadingUI";
+import {getOneNewsAction} from "../../store/news/newsAction";
+import ItemOneNews from "../../component/News/ItemOneNews/ItemOneNews";
+import {SearchLoad} from "../../ui/LoadingUI";
 import {toast} from "react-toastify";
 
 const NewsOneById: FC = () => {

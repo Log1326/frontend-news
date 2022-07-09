@@ -102,7 +102,7 @@ const FormUpdate: FC<Props> = ({onSubmit, items, id}) => {
                                         backgroundPadding={6}
                                         styles={buildStyles({
                                             backgroundColor: "#f0e6ea",
-                                            textColor: "#fff",
+                                            textColor: "#000",
                                             pathColor: "#fff",
                                             trailColor: "transparent"
                                         })}
