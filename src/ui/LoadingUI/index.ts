@@ -1,0 +1,5 @@
+export {default as BigLoad} from './bigLoad/BigLoad'
+export {default as SmallLoad} from './smallLoad/SmallLoad'
+export {default as MessageLoad} from './messageLoad/MessageLoad'
+export {default as SearchLoad} from './searchLoad/SearchLoad'
+export {default as SkeletonLoad} from './skeletonLoad/SkeletonLoad'

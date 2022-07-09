@@ -1,0 +1,7 @@
+.containerRouter {
+    max-width: 95vw;
+    max-height: 95vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

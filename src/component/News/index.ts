@@ -1,0 +1,5 @@
+export {default as AddNews} from './AddNews/AddNews'
+export {default as MyNews} from './MyNews/MyNews'
+export {default as AllNews} from './AllNews/AllNews'
+export {default as NewsOneById} from './NewsOneById/NewsOneById'
+export {default as UpdateNews} from './UpdateNews/UpdateNews'

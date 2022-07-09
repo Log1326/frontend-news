@@ -1,0 +1,189 @@
+
+.formUpdateGiveWidth {
+    width: 80%;
+}
+
+.containerFormUpdate {
+    box-shadow: var(--form-box-shodow);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    padding: 1rem;
+}
+
+.formUpdateControlField {
+    display: flex;
+    flex-flow: column wrap;
+    gap: 1rem;
+    align-items: center;
+}
+
+.formUpdateFiled {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 5px;
+}
+
+.formUpdateFiled > p {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-left: 2rem;
+    color: var(--color-grey-text);
+}
+
+.formUpdateFiled > h1 {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-left: 2rem;
+    color: var(--color-red-text);
+}
+
+.formUpdateFiled > input {
+    font-size: 1.5rem;
+    padding: 1rem;
+    font-weight: bolder;
+    color: var(--color-light-grey);
+    outline: none;
+    border: none;
+    background: var(--color-pink-sweet);
+    border-radius: 20px;
+}
+
+.formUpdateTextAria {
+    width: 100%;
+}
+
+.formUpdateTextAria > p {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-left: 2rem;
+    color: var(--color-grey-text);
+}
+
+.formUpdateTextAria > h1 {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-left: 2rem;
+    color: var(--color-red-text);
+}
+
+.formUpdateTextAriaField {
+    font-size: 1rem;
+    padding: 1rem;
+    font-weight: 600;
+    color: var(--color-light-grey);
+    outline: none;
+    border: none;
+    background: var(--color-pink-sweet);
+    border-radius: 20px;
+    height: 120px;
+    width: 90%;
+}
+
+.formUpdateTextAriaField:hover {
+    cursor: pointer;
+    color: var(--color-pink-strong);
+}
+
+.formUpdateInput:hover {
+    cursor: pointer;
+    color: var(--color-pink-strong);
+}
+
+.formUpdateInput::placeholder {
+    color: var(--color-light-grey);
+}
+
+
+.containerButtons {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.containerButtons > button {
+    border: none;
+    font-size: 1.2rem;
+    font-weight: lighter;
+    margin: 1rem;
+    background: var(--color-purple);
+    color: white;
+    border-radius: 10px;
+    padding: .7rem;
+}
+
+.containerButtons > button:hover {
+    background: var(--color-pink-sweet);
+    color: var(--color-purple);
+    cursor: pointer;
+}
+
+.formUpdateFileInput {
+    display: none;
+}
+
+.formUpdateLabel {
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.formUpdateViewsElem {
+    font-size: 1.5rem;
+    margin: 1rem;
+    padding: 5px;
+    gap: 10px;
+    color: var(--color-grey-text);
+    border: 2px solid var(--color-grey-text);
+    border-radius: 6px;
+    box-shadow: var(--form-box-shodow);
+    position: fixed;
+}
+
+.formUpdateViewsElem:hover {
+    background: var(--color-purple);
+    color: var(--color-white-text);
+    border: none;
+    border-radius: 6px;
+}
+
+.formUpdateImgAndButton {
+    height: 400px;
+    display: flex;
+    flex-flow: wrap column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    margin-top: 1.2rem;
+}
+
+.formUpdateImgAndButton > button {
+    position: absolute;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--color-red-text);
+    padding: .6rem;
+}
+
+.formUpdateImgAndButton > button:hover {
+    color: var(--color-grey-text);
+    cursor: pointer;
+}
+
+
+.formUpdateImgAndButton > img {
+    border-radius: 1rem;
+    width: 300px;
+    height: 400px;
+    object-fit: fill;
+}
+.circleProgressbar{
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

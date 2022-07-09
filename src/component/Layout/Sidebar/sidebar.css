@@ -1,0 +1,43 @@
+
+.sideBarContainer > div {
+    margin: 1rem 0;
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    color: #707070;
+    width: 9rem;
+    padding: 1rem;
+}
+
+.trigger {
+    display: flex;
+    justify-content: flex-end;
+    width: 8rem;
+}
+
+.trigger > * {
+    font-size: 25px;
+    color: var(--color-pink-strong);
+}
+
+.linkText {
+    text-decoration-line: none;
+    color: var(--color-grey-text);
+    display: flex;
+    gap: 1rem;
+    font-size: 1rem;
+}
+
+.linkTextIconsStyle {
+    font-size: 22px;
+    color: var(--color-purple);
+}
+
+.styleIconMenu {
+    font-size: 35px;
+    color: var(--color-purple);
+}

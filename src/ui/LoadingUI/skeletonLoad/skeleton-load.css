@@ -1,0 +1,76 @@
+.containerMapSkeleton {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+
+.containerSkeleton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loaderSkeleton {
+    width: 24rem;
+    height: 28.7rem;
+    border-radius: 12px;
+    box-shadow: var(--form-box-shodow);
+    position: relative;
+    margin: 1rem;
+    background: #FFF;
+}
+
+.loaderSkeleton::after {
+    content: '';
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    margin: 1.5rem;
+    position: absolute;
+    background-image: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5) 80%,
+    transparent 40%),
+    radial-gradient(circle 40px, #DDD 100%, transparent 0),
+    linear-gradient(#DDD 44px, transparent 0),
+    linear-gradient(#DDD 24px, transparent 0),
+    linear-gradient(#DDD 200px, transparent 0),
+    linear-gradient(#DDD 36px, transparent 0),
+    linear-gradient(#DDD 86px, transparent 0);
+
+    background-repeat: no-repeat;
+    background-size: 50px 28rem,
+    95px 86px,
+    150px 90px,
+    150px 50px,
+    280px 200px,
+    120px 26px,
+    120px 26px;
+    background-position: 0 0,
+    0 20px,
+    100px 25px,
+    100px 55px,
+    140px 400px,
+    10px 26px,
+    10px 26px;
+    box-sizing: border-box;
+    animation: animloader 1s linear infinite;
+}
+
+@keyframes animloader {
+    0% {
+        background-position: 10px 10px,
+        0 0,
+        125px 10px,
+        125px 70px,
+        20px 115px,
+        180px 370px,
+        20px 370px;
+    }
+    100% {
+        background-position: 150% 0,
+        0 0,
+        125px 10px,
+        125px 70px,
+        20px 115px,
+        180px 370px,
+        20px 370px;
+    }
+}

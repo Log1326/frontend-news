@@ -1,0 +1,31 @@
+.containerFooter {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem;
+}
+
+.footer2022 {
+    font-size: 2rem;
+    color: var(--color-light-grey);
+}
+
+.footerInfoAboutMe {
+    display: flex;
+    gap: 1rem;
+    margin: 5px;
+}
+
+.footerIconAndSpan {
+    padding: .5rem;
+    margin-left: 5px;
+}
+
+.footerIconAndSpan > a {
+    display: flex;
+    gap: 5px;
+    margin: 1rem;
+    cursor: pointer;
+    text-decoration-line: none;
+    color: var(--color-grey-text);
+}

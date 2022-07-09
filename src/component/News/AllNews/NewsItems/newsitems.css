@@ -1,0 +1,125 @@
+.containerNewsItem {
+    display: flex;
+    margin: 1rem;
+}
+
+.itemNewsBorder {
+    padding: 2rem;
+    width: 20rem;
+    height: 25rem;
+    border-radius: 12px;
+    box-shadow: var(--form-box-shodow);
+}
+
+.itemHeader {
+    display: flex;
+    width: auto;
+}
+
+.userImg {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.containerAuthorNews {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.authorName > span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: var(--color-grey-text);
+}
+
+.itemTitleAndDesc {
+    width: calc(100% - 40px);
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.itemTitleAndDesc > p {
+    font-size: 2.5rem;
+    font-weight: bolder;
+}
+
+.itemTitleAndDesc > span {
+    font-size: 1rem;
+    color: var(--color-light-grey);
+}
+
+.itemLikesAndCountViews {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.itemLikesAndCountViews > div {
+    display: flex;
+    font-size: 1.2rem;
+    color: var(--color-grey-text);
+}
+
+.tagsNewsItems {
+    display: flex;
+    flex-flow: wrap column;
+    justify-content: center;
+    width: 100%;
+}
+
+.ItemNavLink {
+    text-decoration-line: none;
+    color: var(--color-grey-text);
+    cursor: pointer;
+}
+
+.likesAndView > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+}
+
+.styleLike:hover {
+    color: var(--color-purple);
+    cursor: pointer;
+}
+
+.likeHave {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    color: var(--color-purple);
+}
+
+
+.itemImage {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    margin-bottom: 1rem;
+}
+
+.itemImage > img {
+    max-width: 300px;
+    height: 200px;
+}
+
+
+.linkStyle {
+    text-decoration-line: none;
+    color: var(--color-grey-text);
+}
+
+.linkStyle:hover {
+    color: var(--color-purple);
+}

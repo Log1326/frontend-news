@@ -1,0 +1,24 @@
+.containerSearch {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.inputSearch {
+    padding: 5px;
+    margin-left: 10px;
+    border: 1px solid white;
+    border-radius: 7px;
+    box-shadow: rgba(255,255,255,0.5);
+    outline: none;
+}
+
+.inputSearch::placeholder {
+    padding-left: 1rem;
+}
+
+.containerSearch > span {
+    position: relative;
+    left: -22px;
+}

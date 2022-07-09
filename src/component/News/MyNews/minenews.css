@@ -1,0 +1,10 @@
+.containerMyNews {
+    width: 80%;
+}
+
+.paginationPositionMyNews {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+}

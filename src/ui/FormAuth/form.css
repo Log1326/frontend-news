@@ -1,0 +1,131 @@
+.containerFormLogin {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+    width: 20rem;
+    gap: 10px;
+    padding: 1rem;
+    margin-top: 6rem;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+}
+
+.containerFormRegister {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    gap: 10px;
+    padding: 2rem;
+    margin-top: 6rem;
+    box-shadow: var(--form-box-shodow);
+}
+
+.containerFormLogin > input {
+    padding: 1rem;
+    font-size: 15px;
+    border: 0;
+    border-bottom: 2px solid var(--color-light-grey);
+    outline: none;
+}
+
+.containerFormRegister > input {
+    padding: 1rem;
+    font-size: 15px;
+    border: 0;
+    border-bottom: 2px solid var(--color-light-grey);
+    outline: none;
+}
+
+.oneAndTwoInput {
+    display: flex;
+    align-items: center;
+}
+
+.oneAndTwoInput > input {
+    padding: 1rem;
+    font-size: 15px;
+    width: 4.5rem;
+    border: 0;
+    border-bottom: 2px solid var(--color-light-grey);
+    outline: none;
+    margin: 1rem;
+}
+
+.containerForm > p {
+    color: var(--color-red-text);
+    opacity: .4;
+}
+
+.btn {
+    padding: 1rem;
+    margin: 1rem 0;
+    background: none;
+    border: 1px solid var(--color-light-grey);
+    border-radius: 10px;
+    color: var(--color-grey-text);
+    text-decoration-line: underline;
+}
+
+.btn:hover {
+    border: 1px solid var(--color-purple);
+    background: var(--color-purple);
+    color: #fff;
+    border-radius: 10px;
+}
+
+.navLinkForm {
+    text-decoration: none;
+    cursor: pointer;
+    color: lightblue;
+    opacity: 0.9;
+    margin-bottom: 1rem;
+}
+
+.signIn {
+    position: relative;
+    left: 5rem;
+}
+
+.signIn:hover {
+    opacity: 1;
+    color: var(--color-light-grey);
+    font-size: 18px;
+}
+
+.NavLinkSpan {
+    text-decoration-line: underline;
+}
+
+.signUp:hover {
+    opacity: 1;
+    transform: scale(1.1);
+    color:  var(--color-light-grey);
+}
+
+.labelFileFormAuth {
+    color:  var(--color-grey-text);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 12rem;
+    border-bottom: 2px solid var(--color-light-grey);
+    padding: 1rem;
+    cursor: pointer;
+}
+
+.chooseAvatar {
+    font-size: 16px;
+    position: relative;
+    left: -10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+
+.inputFileFormAuth {
+    display: none;
+}
