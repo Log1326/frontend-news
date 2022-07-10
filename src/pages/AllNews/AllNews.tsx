@@ -1,16 +1,16 @@
 import React, {FC, useEffect} from 'react';
-import {useTypeDispatch, useTypeSelector} from "../../store/store";
-import {getAllNewsAction} from "../../store/news/newsAction";
-import {selectorAllNews, selectorOptions, setCurrentPage} from "../../store/news/newsSlice";
+import './allnews.css'
 import {toast} from "react-toastify";
-import NewsItems from "../../component/News/NewsItems/NewsItems";
 import {SkeletonLoad} from "../../ui/LoadingUI";
 import {useLocation, useNavigate} from "react-router-dom";
+import {useTypeDispatch, useTypeSelector} from "../../store/store";
+import {getAllNewsAction} from "../../store/news/newsAction";
+import {setCurrentPage} from "../../store/news/newsSlice";
 import {useQuery} from "../../utils";
-import {NoNews, Pagination} from "../../ui";
-import './allnews.css'
-import {selectorAllUsers} from "../../store/user/userSlice";
 import {get_all_users} from "../../store/user/userAction";
+import {NewsItems, NoNews, Pagination} from "../../component";
+import {selectorAllUsers} from "../../store/user/selectorsUser";
+import {selectorAllNews, selectorOptions} from "../../store/news/selectorsNews";
 
 const AllNews: FC = () => {
     const users = useTypeSelector(selectorAllUsers)
@@ -24,11 +24,10 @@ const AllNews: FC = () => {
     useEffect(() => {
         error && toast.error(error)
     }, [error])
-
     useEffect(() => {
         if (currentPage) {
             dispatch(getAllNewsAction(currentPage))
-            navigate(`?currentPage=${currentPage}`)
+            navigate(`?page=${currentPage}`)
         } else {
             dispatch(getAllNewsAction(1))
         }

@@ -37,6 +37,7 @@
     align-items: center;
     font-size: 18px;
 }
+
 .linksHeader:hover {
     transform: scale(1.2);
     color: var(--color-purple);
@@ -59,8 +60,7 @@
 }
 
 .headerAvatar {
-    width: 3rem;
     height: 3rem;
     border-radius: 50%;
-    object-fit: cover;
+    object-fit: contain;
 }

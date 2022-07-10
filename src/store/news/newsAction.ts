@@ -85,7 +85,7 @@ export const createNewsAction = createAsyncThunk<INews[], IDataPublish, { reject
 )
 
 
-export const removeNewsAction = createAsyncThunk<void, IRemoveNews, { rejectValue: KnowError }>(
+export const removeNewsAction = createAsyncThunk<string, IRemoveNews, { rejectValue: KnowError }>(
     'news/removeNews', async ({id, toast}, {rejectWithValue}) => {
         try {
             const {data} = await api.remove_news(id)

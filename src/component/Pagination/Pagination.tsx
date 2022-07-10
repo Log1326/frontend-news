@@ -3,7 +3,7 @@ import './pagination.css'
 import {AppDispatch} from "../../store/store";
 import {ActionCreatorWithPayload} from "@reduxjs/toolkit";
 import './pagination.css'
-import ButtonNext from "../VariableButton/ButtonNext";
+import ButtonNext from "../../ui/VariableButton/ButtonNext";
 
 interface Props {
     setCurrentPage: ActionCreatorWithPayload<number>

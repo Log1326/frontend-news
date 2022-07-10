@@ -13,7 +13,7 @@ interface Props {
 }
 
 
-const MyNewsDesc: FC<Props> = ({item, handleRemove, handleUpdate}) => {
+const MyNewsDesk: FC<Props> = ({item, handleRemove, handleUpdate}) => {
     const createAt = moment(item.createdAt).format('LLL')
     return (
         <div className='containerMyNewsDesc'>
@@ -22,10 +22,10 @@ const MyNewsDesc: FC<Props> = ({item, handleRemove, handleUpdate}) => {
                     <span>title:</span>{item.title}
                 </div>
                 <div>
-                    <span>description:</span> {excerpt(item.description, 40)}
+                    <span>description:</span>{item.description.length > 40 ? excerpt(item.description, 40) : item.description}
                 </div>
                 <div>
-                    <span>tags:</span>{ item.tags.map((tag, index) =>
+                    <span>tags:</span>{item.tags.map((tag, index) =>
                     <NavLink className='itemNavLinkMyNews' to={`/${tag}`} key={index}>{`#${tag}`}</NavLink>
                 )}
                 </div>
@@ -54,4 +54,4 @@ const MyNewsDesc: FC<Props> = ({item, handleRemove, handleUpdate}) => {
     );
 };
 
-export default MyNewsDesc;
+export default MyNewsDesk;

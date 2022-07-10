@@ -5,10 +5,10 @@ import './mainrouter.css'
 import {Route, Routes} from 'react-router-dom'
 import {useTypeDispatch, useTypeSelector} from "../store/store";
 import {get_current_user} from "../store/user/userAction";
-import {selectorUser} from "../store/user/userSlice";
 import {Login, Registration} from "../pages/Auth";
+import {AddNews, AllNews, MyNewsDesk, NewsOneById, UpdateNews} from "../pages";
 import {Footer, Header, Layout} from "../component";
-import {AddNews, AllNews, MyNews, NewsOneById, UpdateNews} from '../pages/index'
+import {selectorUser} from "../store/user/selectorsUser";
 
 const MainRouter: FC = () => {
     const {user, error} = useTypeSelector(selectorUser)
@@ -32,7 +32,7 @@ const MainRouter: FC = () => {
                         <Route path={'/news/:id'} element={<NewsOneById/>}/>
                         {user && <>
                             <Route path={'add_news'} element={<AddNews/>}/>
-                            <Route path={'my_news/:userId'} element={<MyNews/>}/>
+                            <Route path={'my_news/:userId'} element={<MyNewsDesk/>}/>
                             <Route path={'update/:id'} element={<UpdateNews/>}/>
                         </>}
                     </Route>

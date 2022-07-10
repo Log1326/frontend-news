@@ -4,23 +4,24 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {INews, IPublishNews} from "../../store/news/types";
 import {_url, fileUpload} from "../../service/api";
 import {BiImageAdd} from "react-icons/bi";
-import {excerpt} from "../../utils";
-import {useNavigate} from "react-router-dom";
+import {NavigateFunction} from "react-router-dom";
 import imgUpload from '../../accept/imgUpload.png'
-import {CircularProgressbar, buildStyles} from 'react-circular-progressbar';
+import {buildStyles, CircularProgressbar} from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import {foundItem} from "../../utils";
 
 interface Props {
     onSubmit: SubmitHandler<IPublishNews>
     items: INews[]
     id?: string
+    navigate: NavigateFunction
 }
 
-const FormUpdate: FC<Props> = ({onSubmit, items, id}) => {
+const FormUpdate: FC<Props> = ({onSubmit, items, id, navigate}) => {
     const [img, setImg] = useState<string>('')
     const [isLoading, setLoading] = useState<number | null>(null)
-    const findItem = useMemo(() => items.find(el => el._id === id), [items])
-    const navigate = useNavigate()
+    const item = foundItem(items, id)
+    const itemMemo = useMemo(() => item, [item])
     const {
         register,
         handleSubmit,
@@ -31,10 +32,10 @@ const FormUpdate: FC<Props> = ({onSubmit, items, id}) => {
     } = useForm<IPublishNews>({
         mode: 'onChange',
         defaultValues: {
-            title: findItem?.title || '',
-            description: excerpt(String(findItem?.description), 150) || '',
-            tags: findItem?.tags.toString() || '',
-            imageUrl: findItem?.imageUrl,
+            title: itemMemo?.title || '',
+            description: itemMemo?.description || '',
+            tags: itemMemo?.tags.toString() || '',
+            imageUrl: itemMemo?.imageUrl,
         }
     })
     useEffect(() => {
@@ -42,9 +43,9 @@ const FormUpdate: FC<Props> = ({onSubmit, items, id}) => {
     }, [])
 
     useEffect(() => {
-        !findItem && navigate(-1)
-        findItem?.imageUrl && setImg(findItem?.imageUrl)
-    }, [findItem])
+        !itemMemo && navigate(-1)
+        itemMemo?.imageUrl && setImg(itemMemo?.imageUrl)
+    }, [itemMemo])
     const handleClear = () => reset()
 
     return (

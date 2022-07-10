@@ -10,7 +10,7 @@ interface Props {
     onSubmit: SubmitHandler<IPublishNews>
 }
 
-const NewsForm: FC<Props> = ({onSubmit}) => {
+const AddFormNews: FC<Props> = ({onSubmit}) => {
     const [img, setImg] = useState<string>('')
     const [isLoading, setLoading] = useState<number | null>(null)
 
@@ -101,4 +101,4 @@ const NewsForm: FC<Props> = ({onSubmit}) => {
     );
 };
 
-export default NewsForm;
+export default AddFormNews;

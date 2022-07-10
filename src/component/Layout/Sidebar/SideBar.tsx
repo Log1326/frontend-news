@@ -6,7 +6,7 @@ import {TbNews} from 'react-icons/tb'
 import './sidebar.css'
 import {Link, useNavigate} from 'react-router-dom'
 import {useTypeSelector} from "../../../store/store";
-import {selectorUser} from "../../../store/user/userSlice";
+import {selectorUser} from "../../../store/user/selectorsUser";
 
 
 const SideBar: FC = () => {

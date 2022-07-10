@@ -1,7 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {initialTypeState, statusUser} from "./types";
 import {get_all_users, get_current_user, sign_in, sign_up} from "./userAction";
-import {RootState} from "../store";
 
 
 const initialState: initialTypeState = {
@@ -81,8 +80,7 @@ export const userSlice = createSlice({
             })
     }
 })
-export const selectorAllUsers = (state: RootState) => state.user.users
-export const selectorUser = (state: RootState) => state.user
+
 export const {logout} = userSlice.actions
 export default userSlice.reducer
 

@@ -16,11 +16,10 @@ export interface IOptions {
     totalNews: number | null
 }
 
-export interface GetNewsAll {
-    data: INews[]
-    currentPage: number | null
-    numberOfPages: number | null
-    totalNews: number | null
+export type Items = {
+    items: INews[]
+    status: statusLoading | null
+    error: string | null
 }
 
 export enum statusLoading {
@@ -29,11 +28,6 @@ export enum statusLoading {
     wrong = 'wrong'
 }
 
-export type Items = {
-    items: INews[]
-    status: statusLoading | null
-    error: string | null
-}
 
 export interface INews {
     title: string,
@@ -46,6 +40,15 @@ export interface INews {
     createdAt: string
     _id: string
 }
+
+
+export interface GetNewsAll {
+    data: INews[]
+    currentPage: number | null
+    numberOfPages: number | null
+    totalNews: number | null
+}
+
 
 export interface IGetNewsByUser {
     data: INews[]
@@ -72,14 +75,14 @@ export interface IDataPublish {
 
 export interface IUpdatePublish {
     newsData: IPublishNews
-    id?: string
+    id: string
     navigate: NavigateFunction
     toast: any
 }
 
 export interface IUpdateSend {
     newsData: IPublishNews
-    id?: string
+    id: string
 }
 
 

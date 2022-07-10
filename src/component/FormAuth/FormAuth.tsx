@@ -11,7 +11,7 @@ interface props {
     onSubmit: SubmitHandler<IUser>
 }
 
-const Form: FC<props> = ({isLogin, onSubmit}) => {
+const FormAuth: FC<props> = ({isLogin, onSubmit}) => {
     const [img, setImg] = useState<string>('')
     const {register, handleSubmit, formState: {errors}, watch, setValue} = useForm<IUser>()
     const passwordRef = useRef({});
@@ -129,4 +129,4 @@ const Form: FC<props> = ({isLogin, onSubmit}) => {
     );
 };
 
-export default Form;
+export default FormAuth;

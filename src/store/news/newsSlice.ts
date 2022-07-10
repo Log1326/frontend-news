@@ -8,7 +8,6 @@ import {
     removeNewsAction,
     searchNewsAction, updateNewsAction
 } from "./newsAction";
-import {RootState} from "../store";
 
 const initialState: newsStateNews = {
     oneNewsById: {
@@ -178,10 +177,5 @@ const newsSlice = createSlice({
     }
 })
 
-
-export const selectorOneNewsById = (state: RootState) => state.news.oneNewsById
-export const selectorAllNews = (state: RootState) => state.news.allNews
-export const selectorUserNewsById = (state: RootState) => state.news.userNewsById
-export const selectorOptions = (state: RootState) => state.news.options
 export const {setCurrentPage, setCurrentPageByUser} = newsSlice.actions
 export default newsSlice.reducer

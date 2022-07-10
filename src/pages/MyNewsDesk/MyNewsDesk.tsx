@@ -2,14 +2,15 @@ import React, {FC, useEffect} from 'react';
 import './minenews.css'
 import {useTypeDispatch, useTypeSelector} from "../../store/store";
 import {getNewsByUserIdAction, removeNewsAction} from "../../store/news/newsAction";
-import {selectorUser} from "../../store/user/userSlice";
-import {selectorUserNewsById, setCurrentPageByUser} from "../../store/news/newsSlice";
-import {MyNewsDesc, NoNews, Pagination} from "../../ui";
+import {setCurrentPageByUser} from "../../store/news/newsSlice";
 import {toast} from "react-toastify";
 import {BigLoad} from "../../ui/LoadingUI";
 import {useNavigate} from "react-router-dom";
+import {MyNewsDesc, NoNews, Pagination} from "../../component";
+import {selectorUser} from "../../store/user/selectorsUser";
+import {selectorUserNewsById} from "../../store/news/selectorsNews";
 
-const MyNews: FC = () => {
+const MyNewsDesk: FC = () => {
     const {user} = useTypeSelector(selectorUser)
     const {data, options} = useTypeSelector(selectorUserNewsById)
     const {items, status, error} = data
@@ -25,8 +26,10 @@ const MyNews: FC = () => {
 
     useEffect(() => {
         userId && dispatch(getNewsByUserIdAction({userId, page}))
+    }, [userId])
+    useEffect(() => {
         page && navigate(`?page=${page}?totalCountNews=${totalNews}?numberOfPages=${numberOfPages}`)
-    }, [userId, page])
+    }, [page])
 
     const handleUpdate = (id: string) => navigate(`/update/${id}`)
     const handleRemove = (id: string) => dispatch(removeNewsAction({id, toast}))
@@ -53,5 +56,5 @@ const MyNews: FC = () => {
     );
 };
 
-export default MyNews;
+export default MyNewsDesk;
 

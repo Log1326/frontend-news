@@ -1,5 +1,12 @@
-.containerNewsOneId{
+.containerNewsOneId {
     display: flex;
     width: 100%;
     justify-content: center;
+}
+
+.searchLoad {
+    display: flex;
+    align-items: center;
+    margin-top: 5rem;
+    height: 500px;
 }

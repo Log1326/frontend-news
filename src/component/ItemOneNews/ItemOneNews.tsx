@@ -1,13 +1,13 @@
 import React, {FC} from 'react';
 import './itemonenews.css'
-import {INews} from "../../../store/news/types";
-import {AppDispatch} from "../../../store/store";
-import {_url} from "../../../service/api";
+import {INews} from "../../store/news/types";
+import {AppDispatch} from "../../store/store";
+import {_url} from "../../service/api";
 import {NavLink} from "react-router-dom";
 import moment from "moment";
 import {BiLike} from "react-icons/bi";
 import {GrView} from "react-icons/gr";
-import {likesNews} from "../../../store/news/newsAction";
+import {likesNews} from "../../store/news/newsAction";
 
 interface Props {
     item: INews
@@ -20,18 +20,18 @@ const ItemOneNews: FC<Props> = ({item, dispatch}) => {
     return (
         <div className='containerNewsOne'>
             <div className='titleNewsOne'>
-                <p>Title:</p>
+                <p>Title</p>
                 <span>{item.title}</span>
             </div>
             <hr className='hrOneNews'/>
-            <div className='descriptionNewsOne'>
-                <p>Description</p>
-                <span>{item.description}</span>
-            </div>
-            <div className='imgNewsOne'>
-                <img
-                    className='styleImg'
-                    src={_url + item.imageUrl} alt={item.title}/>
+            <div className='containerDescription'>
+                <h1>Description</h1>
+                <div className='descriptionAndTextAndImgContainer'>
+                    <p>{item.description}</p>
+                    <img
+                        className='imgStyle'
+                        src={_url + item.imageUrl} alt={item.title}/>
+                </div>
             </div>
             <div className='createdAtNewsOne'>
                 <p>Created at: </p>
@@ -51,22 +51,20 @@ const ItemOneNews: FC<Props> = ({item, dispatch}) => {
                     </p>
                 </div>
                 <div className='likesAndViewsOneNews'>
-                    <p onClick={() => dispatch(likesNews(item._id))}
-                       className='styleLikeByOneNews'>
+                    <div onClick={() => dispatch(likesNews(item._id))}
+                         className='styleLikeByOneNews'>
                         {item.likes.length > 0 ?
-                            <>
-                                <div className='likeHaveByOneNews'>
-                                    <span>{item.likes.length}</span>
-                                    <BiLike/>
-                                </div>
-                            </>
-                            :
-                            <>
+                            <div className='likeHaveByOneNews'>
                                 <span>{item.likes.length}</span>
                                 <BiLike/>
-                            </>
+                            </div>
+                            :
+                            <div className='unLikeHaveByOneNews'>
+                                <span>{item.likes.length}</span>
+                                <BiLike/>
+                            </div>
                         }
-                    </p>
+                    </div>
                     <p>
                         <span>{item.viewsCount}</span>
                         <GrView/>

@@ -1,12 +1,12 @@
 import React, {FC} from 'react';
 import {SubmitHandler} from "react-hook-form";
 import {IPublishNews} from "../../store/news/types";
-import {NewsForm} from "../../ui";
 import {useTypeDispatch} from "../../store/store";
 import {createNewsAction} from "../../store/news/newsAction";
 import {useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
 import './addnews.css'
+import {AddFormNews} from "../../component";
 
 const AddNews: FC = () => {
     const dispatch = useTypeDispatch()
@@ -16,7 +16,7 @@ const AddNews: FC = () => {
     }
     return (
         <div className='containerAddNews'>
-            <NewsForm onSubmit={onSubmit}/>
+            <AddFormNews onSubmit={onSubmit}/>
         </div>
     );
 };

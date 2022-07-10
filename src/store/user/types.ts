@@ -1,5 +1,16 @@
 import {NavigateFunction} from "react-router-dom";
+export interface initialTypeState {
+    user: IUser | null
+    users: IUsers[]
+    status: statusUser | null
+    error: string | null
+}
 
+export enum statusUser {
+    loading = 'loading',
+    loaded = 'completed',
+    error = 'error'
+}
 export interface IUser {
     firstName: string
     lastName: string
@@ -21,19 +32,6 @@ export interface IUsers {
 export interface IData {
     data: IUser
     token: string
-}
-
-export enum statusUser {
-    loading = 'loading',
-    loaded = 'completed',
-    error = 'error'
-}
-
-export interface initialTypeState {
-    user: IUser | null
-    users: IUsers[]
-    status: statusUser | null
-    error: string | null
 }
 
 export interface IApi {

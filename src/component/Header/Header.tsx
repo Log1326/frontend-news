@@ -1,14 +1,15 @@
 import React, {FC, useState} from 'react';
 import {NavLink, useNavigate} from 'react-router-dom'
-import {Search} from "../../ui";
 import './header.css'
-import {logout, selectorUser} from "../../store/user/userSlice";
-import {useTypeDispatch, useTypeSelector} from "../../store/store";
 import {_url} from "../../service/api";
 import {BsPersonCircle} from "react-icons/bs";
 import {TbLogout} from 'react-icons/tb'
+import {logout} from "../../store/user/userSlice";
+import {useTypeDispatch, useTypeSelector} from "../../store/store";
+import {getAllNewsAction, searchNewsAction} from "../../store/news/newsAction";
+import {selectorUser} from "../../store/user/selectorsUser";
+import {Search} from "../index";
 import {SmallLoad} from "../../ui/LoadingUI";
-import {searchNewsAction} from "../../store/news/newsAction";
 
 
 const Header: FC = () => {
@@ -59,7 +60,7 @@ const Header: FC = () => {
             </div>
             <div className='linksAndSearchHeader'>
                 <NavLink className='linksHeader' to={'/'}
-                         onClick={() => navigate('/')}>
+                         onClick={() => dispatch(getAllNewsAction(1))}>
                     News
                 </NavLink>
 

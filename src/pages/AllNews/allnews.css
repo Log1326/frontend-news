@@ -6,12 +6,12 @@
 
 .itemNewsContainer {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: column;
+    align-items: center;
 }
 
 .paginationPosition {
     display: flex;
-
     justify-content: center;
     align-items: center;
     margin: 1rem;
