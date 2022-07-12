@@ -1,16 +1,17 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useMemo, useState} from 'react';
 import './skeleton-load.css'
 
 
 const SkeletonLoad: FC = () => {
     const total = localStorage.getItem('totalNews')
-    const skeletonLoad = (): JSX.Element => {
+    const skeletonLoad = useMemo(() => (): JSX.Element => {
         return (
             <div className='containerSkeleton'>
                 <span className='loaderSkeleton'/>
             </div>
         )
-    }
+    }, [])
+
     const [values] = useState(new Array(Number(total)).fill(skeletonLoad()));
     return (
         <div className='containerMapSkeleton'>

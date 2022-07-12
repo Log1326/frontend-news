@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC, useEffect, useLayoutEffect} from 'react';
 import './minenews.css'
 import {useTypeDispatch, useTypeSelector} from "../../store/store";
 import {getNewsByUserIdAction, removeNewsAction} from "../../store/news/newsAction";
@@ -14,23 +14,20 @@ const MyNewsDesk: FC = () => {
     const {user} = useTypeSelector(selectorUser)
     const {data, options} = useTypeSelector(selectorUserNewsById)
     const {items, status, error} = data
-    const {currentPage, numberOfPages, totalNews} = options
     const navigate = useNavigate()
-    const page = currentPage !== null ? currentPage : 1
+    const page: number | null = options.currentPage !== null ? options.currentPage : 1
     const dispatch = useTypeDispatch()
-    const userId = user?._id
 
-    useEffect(() => {
+
+    useLayoutEffect(() => {
         error && toast.error(error)
     }, [error])
-
     useEffect(() => {
-        userId && dispatch(getNewsByUserIdAction({userId, page}))
-    }, [userId])
+        user?._id && dispatch(getNewsByUserIdAction({userId: user?._id, page}))
+    }, [user?._id])
     useEffect(() => {
-        page && navigate(`?page=${page}?totalCountNews=${totalNews}?numberOfPages=${numberOfPages}`)
+        page && navigate(`?page=${page}?totalCountNews=${options.totalNews}?numberOfPages=${options.numberOfPages}`)
     }, [page])
-
     const handleUpdate = (id: string) => navigate(`/update/${id}`)
     const handleRemove = (id: string) => dispatch(removeNewsAction({id, toast}))
     return (
@@ -43,18 +40,19 @@ const MyNewsDesk: FC = () => {
                         {items && items?.map(item => <MyNewsDesc handleRemove={handleRemove} handleUpdate={handleUpdate}
                                                                  item={item} key={item.createdAt + item._id}/>)}
                     </div>
-                    <div>{items?.length === 0 && <NoNews children={'There are not your news'}/>}</div>
+                    <div>
+                        {items?.length === 0 && <NoNews>{`There are not your news`}</NoNews>}
+                    </div>
                     {items && items?.length > 0 &&
                         <div className='paginationPositionMyNews'>
-                            <Pagination setCurrentPage={setCurrentPageByUser} currentPage={currentPage}
-                                        numberOfPages={numberOfPages} dispatch={dispatch}/>
+                            <Pagination setCurrentPage={setCurrentPageByUser} options={options} dispatch={dispatch}/>
                         </div>
                     }
                 </>
             }
         </div>
     );
-};
+}
 
 export default MyNewsDesk;
 

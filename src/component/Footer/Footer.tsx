@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {memo} from 'react';
 import './footer.css'
 import {BsLinkedin} from 'react-icons/bs'
 import {AiFillFacebook, AiFillGithub, AiOutlineLink} from "react-icons/ai";
 import resume from './2022_CV_Pavel_Motovilov_Frontend_Web.docx'
 
-const Footer = () => {
+const Footer = memo(() => {
     return (
         <div className='containerFooter'>
             <div className='footer2022'>© 2022 Made to demonstrate.</div>
@@ -32,6 +32,6 @@ const Footer = () => {
             </div>
         </div>
     );
-};
+})
 
 export default Footer;

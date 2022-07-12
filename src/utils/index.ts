@@ -1,6 +1,7 @@
 import {useLocation} from "react-router-dom";
 import {IUsers} from "../store/user/types";
 import {INews} from "../store/news/types";
+import moment from "moment";
 
 export function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -15,3 +16,5 @@ export const foundUser = (users: IUsers[], id: string) => {
 export const foundItem = (items: INews[], id: string | undefined) => {
     return items.find(item => item._id === id)
 }
+export const ChangeMoment = (time: string) => moment(time).format('LLL')
+export const patternValueEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i

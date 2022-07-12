@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useMemo, useState} from 'react';
+import React, {FC, memo, useEffect, useMemo, useState} from 'react';
 import './formupdate.css'
 import {SubmitHandler, useForm} from "react-hook-form";
 import {INews, IPublishNews} from "../../store/news/types";
@@ -17,11 +17,10 @@ interface Props {
     navigate: NavigateFunction
 }
 
-const FormUpdate: FC<Props> = ({onSubmit, items, id, navigate}) => {
+const FormUpdate: FC<Props> = memo(({onSubmit, items, id, navigate}) => {
     const [img, setImg] = useState<string>('')
     const [isLoading, setLoading] = useState<number | null>(null)
-    const item = foundItem(items, id)
-    const itemMemo = useMemo(() => item, [item])
+    const item = useMemo(() => foundItem(items, id), [])
     const {
         register,
         handleSubmit,
@@ -32,10 +31,10 @@ const FormUpdate: FC<Props> = ({onSubmit, items, id, navigate}) => {
     } = useForm<IPublishNews>({
         mode: 'onChange',
         defaultValues: {
-            title: itemMemo?.title || '',
-            description: itemMemo?.description || '',
-            tags: itemMemo?.tags.toString() || '',
-            imageUrl: itemMemo?.imageUrl,
+            title: item?.title || '',
+            description: item?.description || '',
+            tags: item?.tags.toString() || '',
+            imageUrl: item?.imageUrl,
         }
     })
     useEffect(() => {
@@ -43,11 +42,10 @@ const FormUpdate: FC<Props> = ({onSubmit, items, id, navigate}) => {
     }, [])
 
     useEffect(() => {
-        !itemMemo && navigate(-1)
-        itemMemo?.imageUrl && setImg(itemMemo?.imageUrl)
-    }, [itemMemo])
+        !item && navigate(-1)
+        item?.imageUrl && setImg(item?.imageUrl)
+    }, [item])
     const handleClear = () => reset()
-
     return (
         <div className='formUpdateGiveWidth'>
             <form onSubmit={e => e.preventDefault()}>
@@ -157,6 +155,6 @@ const FormUpdate: FC<Props> = ({onSubmit, items, id, navigate}) => {
             </form>
         </div>
     );
-};
+})
 
 export default FormUpdate;

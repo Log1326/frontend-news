@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, memo, useCallback} from 'react';
 import './search.css'
 import {AiOutlineSearch} from 'react-icons/ai'
 
@@ -8,13 +8,13 @@ interface Props {
     handleSubmit: (e: React.KeyboardEvent<HTMLInputElement>) => void
 }
 
-const Search: FC<Props> = ({search, handleSubmit, setSearch}) => {
-
+const Search: FC<Props> = memo(({search, handleSubmit, setSearch}) => {
+    const onChange = useCallback((e: any) => setSearch(e.target.value), [])
     return (
         <div className='containerSearch'>
             <input
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={onChange}
                 className='inputSearch'
                 type="text"
                 placeholder={'Search'}
@@ -23,6 +23,6 @@ const Search: FC<Props> = ({search, handleSubmit, setSearch}) => {
             <span onClick={() => alert(' you may just to click enter')}><AiOutlineSearch/></span>
         </div>
     );
-};
+})
 
 export default Search;

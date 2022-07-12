@@ -1,0 +1,42 @@
+.containerRightSide {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.containerUsersRightSide {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--form-box-shodow);
+    margin-top: 10px;
+    border-radius: 15%;
+    padding: 1rem;
+}
+
+.imgStyleRightSide {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+.firstNameAndLastname {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    font-size: .6rem;
+    gap: .3rem;
+    color: var(--color-grey-text);
+}
+.rightSideNavLink{
+    text-decoration-line: none;
+    color: var(--color-grey-text);
+}
+.tagsContainer{
+    display: flex;
+    flex-direction: column;
+    font-size: 2rem;
+}

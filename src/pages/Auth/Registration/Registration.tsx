@@ -19,6 +19,6 @@ const Registration: FC = () => {
             <FormAuth onSubmit={onSubmit} isLogin={true}/>
         </div>
     );
-};
+}
 
 export default Registration;

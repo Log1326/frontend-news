@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC, useLayoutEffect} from 'react';
 import './updatenews.css'
 import {useTypeDispatch, useTypeSelector} from "../../store/store";
 import {useNavigate, useParams} from "react-router-dom";
@@ -11,12 +11,12 @@ import {selectorUserNewsById} from "../../store/news/selectorsNews";
 
 const UpdateNews: FC = () => {
     const {data: {items, error}} = useTypeSelector(selectorUserNewsById)
-    useEffect(() => {
-        error && toast.error(error)
-    }, [error])
     const {id} = useParams()
     const dispatch = useTypeDispatch()
     const navigate = useNavigate()
+    useLayoutEffect(() => {
+        error && toast.error(error)
+    }, [error])
     const onSubmitClick: SubmitHandler<IPublishNews> = (newsData) => {
         dispatch(updateNewsAction({newsData, id, navigate, toast} as IUpdatePublish))
     }

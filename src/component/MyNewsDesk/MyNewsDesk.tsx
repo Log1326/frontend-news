@@ -1,10 +1,9 @@
-import React, {FC} from 'react';
+import React, {FC, memo, useCallback} from 'react';
 import './mynewsdesc.css'
 import {INews} from "../../store/news/types";
-import {_url} from "../../service/api";
-import moment from "moment";
 import {NavLink} from "react-router-dom";
-import {excerpt} from "../../utils";
+import {ChangeMoment, excerpt} from "../../utils";
+import {_url} from "../../service/api";
 
 interface Props {
     item: INews
@@ -13,8 +12,9 @@ interface Props {
 }
 
 
-const MyNewsDesk: FC<Props> = ({item, handleRemove, handleUpdate}) => {
-    const createAt = moment(item.createdAt).format('LLL')
+const MyNewsDesk: FC<Props> = memo(({item, handleRemove, handleUpdate}) => {
+    const edit = useCallback(() => handleUpdate(item._id), [handleUpdate])
+    const remove = useCallback(() => handleRemove(item._id), [handleRemove])
     return (
         <div className='containerMyNewsDesc'>
             <div className='itemMyNews'>
@@ -31,7 +31,7 @@ const MyNewsDesk: FC<Props> = ({item, handleRemove, handleUpdate}) => {
                 </div>
                 <div className='itemMyNews'>
                     <div>
-                        <span>created at: {createAt}</span>
+                        <span>created at: {ChangeMoment(item.createdAt)}</span>
                     </div>
                     <div>
                         <span>like: {item.likes.length}</span>
@@ -47,11 +47,11 @@ const MyNewsDesk: FC<Props> = ({item, handleRemove, handleUpdate}) => {
             </div>
 
             <div className='buttonStyles'>
-                <span onClick={() => handleUpdate(item._id)}>edit</span>
-                <span onClick={() => handleRemove(item._id)}>remove</span>
+                <span onClick={edit}>edit</span>
+                <span onClick={remove}>remove</span>
             </div>
         </div>
     );
-};
+})
 
 export default MyNewsDesk;

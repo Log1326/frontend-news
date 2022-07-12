@@ -1,4 +1,4 @@
-import React, {FC, useMemo} from 'react';
+import React, {FC, memo, useCallback, useMemo} from 'react';
 import {INews} from "../../store/news/types";
 import './newsitems.css'
 import {BiLike} from 'react-icons/bi'
@@ -16,9 +16,9 @@ interface Props {
     users: IUsers[]
 }
 
-const NewsItems: FC<Props> = ({item, users, dispatch}) => {
-    const user = foundUser(users, item.creator)
-    const userMemo = useMemo(() => user, [user])
+const NewsItems: FC<Props> = memo(({item, users, dispatch}) => {
+    const userMemo = useMemo(() => foundUser(users, item.creator), [])
+    const likes = useCallback(() => dispatch(likesNews(item._id)), [])
     return (
         <div className='containerNewsItem'>
             <div className='itemNewsBorder'>
@@ -60,9 +60,7 @@ const NewsItems: FC<Props> = ({item, users, dispatch}) => {
                         )}
                     </div>
                     <div className='likesAndView'>
-                        <div
-                            onClick={() => dispatch(likesNews(item._id))}
-                            className='styleLike'>
+                        <div onClick={likes} className='styleLike'>
                             {item.likes.length > 0 ?
                                 <>
                                     <div className='likeHave'>
@@ -87,6 +85,6 @@ const NewsItems: FC<Props> = ({item, users, dispatch}) => {
             </div>
         </div>
     );
-};
+})
 
 export default NewsItems;

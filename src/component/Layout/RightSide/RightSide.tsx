@@ -1,41 +1,40 @@
-import React, {FC, useMemo} from 'react';
+import React, {FC, memo} from 'react';
 import './rightside.css'
-import {useTypeSelector} from "../../../store/store";
-import {selectorAllUsers, selectorUser} from "../../../store/user/selectorsUser";
 import {_url} from "../../../service/api";
-import {selectorAllNews} from "../../../store/news/selectorsNews";
+import {NavLink} from "react-router-dom";
+import {IUsers} from "../../../store/user/types";
 
-const RightSide: FC = () => {
-    const users = useTypeSelector(selectorAllUsers)
-    const {user} = useTypeSelector(selectorUser)
-    const {items} = useTypeSelector(selectorAllNews)
-    const filteredUsers = useMemo(() => users.filter(item => item._id !== user?._id), [user])
-    const findTagsUsers = items.filter(item => item.creator === user?._id).map(item => item)
+interface Props {
+    UsersFiltered: IUsers[]
+    UserFindItems: string[]
+}
 
+const RightSide: FC<Props> = memo(({UserFindItems, UsersFiltered}) => {
     return (
-        <div>
+        <div className='containerRightSide'>
 
-            <div>
-                <p>My Tags</p>
-                {findTagsUsers && findTagsUsers.map(tag =>
-                    <div key={tag._id}>
-                        <p>{tag.tags.toString()}</p>
-                    </div>
+            <div className='tagsContainer'>
+                {UserFindItems.map((item, index) =>
+                    <NavLink key={index} className='rightSideNavLink' to={`/${item}`}>
+                        <span>{`#${item}`}</span>
+                    </NavLink>
                 )}
             </div>
             <div>
-                {filteredUsers && filteredUsers.map(user =>
-                    <div key={user._id}>
-                        {user.firstName}
-                        {user.lastName}
-                        <img style={{width: '7rem', height: '7rem'}} src={_url + user.avatar}
+                {UsersFiltered && UsersFiltered.map(user =>
+                    <div key={user._id} className='containerUsersRightSide'>
+                        <img className='imgStyleRightSide' src={_url + user.avatar}
                              alt={String(user.avatar)}/>
+                        <p className='firstNameAndLastname'>
+                            <span>{user.firstName}</span>
+                            <span>{user.lastName}</span>
+                        </p>
                     </div>
                 )}
             </div>
 
         </div>
     );
-};
+})
 
 export default RightSide;

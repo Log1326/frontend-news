@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC, useEffect, useLayoutEffect} from 'react';
 import './newsonebyid.css'
 import {useTypeDispatch, useTypeSelector} from "../../store/store";
 import {useParams} from "react-router-dom";
@@ -14,8 +14,8 @@ const NewsOneById: FC = () => {
     const dispatch = useTypeDispatch()
     useEffect(() => {
         id && dispatch(getOneNewsAction(id))
-    }, [])
-    useEffect(() => {
+    }, [id])
+    useLayoutEffect(() => {
         error && toast.error(error)
     }, [error])
     return (

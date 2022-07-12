@@ -1,18 +1,19 @@
-import React, {FC} from 'react';
+import React, {FC, memo} from 'react';
 import './pagination.css'
 import {AppDispatch} from "../../store/store";
 import {ActionCreatorWithPayload} from "@reduxjs/toolkit";
 import './pagination.css'
 import ButtonNext from "../../ui/VariableButton/ButtonNext";
+import {IOptions} from "../../store/news/types";
 
 interface Props {
     setCurrentPage: ActionCreatorWithPayload<number>
-    currentPage: number | null
-    numberOfPages: number | null
+    options: IOptions,
     dispatch: AppDispatch
 }
 
-const Pagination: FC<Props> = ({dispatch, setCurrentPage, numberOfPages, currentPage}) => {
+const Pagination: FC<Props> = memo(({dispatch, setCurrentPage, options: {numberOfPages, currentPage}}) => {
+
     const renderPagination = () => {
         if (numberOfPages === 0) return null
         if (currentPage === numberOfPages && currentPage === 1) return null
@@ -47,6 +48,6 @@ const Pagination: FC<Props> = ({dispatch, setCurrentPage, numberOfPages, current
         }
     }
     return renderPagination()
-};
+})
 
 export default Pagination;

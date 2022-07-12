@@ -1,4 +1,4 @@
-import React, {FC, FormEvent, useEffect, useState,} from 'react';
+import React, {FC, FormEvent, memo, useEffect, useState,} from 'react';
 import './newsform.css'
 import {SubmitHandler, useForm} from 'react-hook-form'
 import {IPublishNews} from "../../store/news/types";
@@ -10,17 +10,15 @@ interface Props {
     onSubmit: SubmitHandler<IPublishNews>
 }
 
-const AddFormNews: FC<Props> = ({onSubmit}) => {
+const AddFormNews: FC<Props> = memo(({onSubmit}) => {
     const [img, setImg] = useState<string>('')
     const [isLoading, setLoading] = useState<number | null>(null)
-
     const {register, handleSubmit, formState: {errors}, reset, setFocus, setValue} = useForm<IPublishNews>({
         mode: 'onBlur'
     })
     useEffect(() => {
         setFocus('title')
     }, [])
-
     return (
         <>
             <div className='addTourText'>Add News</div>
@@ -47,19 +45,19 @@ const AddFormNews: FC<Props> = ({onSubmit}) => {
                 />
 
                 {isLoading && isLoading < 99 ?
-                        <CircularProgressbar
-                            strokeWidth={10}
-                            backgroundPadding={10}
-                            background
-                            styles={buildStyles({
-                                textSize:'30px',
-                                backgroundColor: "#f0e6ea",
-                                textColor: "#fff",
-                                pathColor: "#fff",
-                                trailColor: "transparent"
-                            })}
-                            className={'loading'}
-                            value={isLoading} text={`${isLoading}%`}/>
+                    <CircularProgressbar
+                        strokeWidth={10}
+                        backgroundPadding={10}
+                        background
+                        styles={buildStyles({
+                            textSize: '30px',
+                            backgroundColor: "#f0e6ea",
+                            textColor: "#fff",
+                            pathColor: "#fff",
+                            trailColor: "transparent"
+                        })}
+                        className={'loading'}
+                        value={isLoading} text={`${isLoading}%`}/>
                     :
                     <label className='labelFile'>
                         <input
@@ -99,6 +97,6 @@ const AddFormNews: FC<Props> = ({onSubmit}) => {
         </>
 
     );
-};
+})
 
 export default AddFormNews;

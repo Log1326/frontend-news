@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, memo, useState} from 'react';
 import {AiOutlineMenuFold, AiOutlineMenuUnfold} from 'react-icons/ai'
 import {FaAddressCard} from 'react-icons/fa'
 import {ImNewspaper} from 'react-icons/im'
@@ -9,7 +9,7 @@ import {useTypeSelector} from "../../../store/store";
 import {selectorUser} from "../../../store/user/selectorsUser";
 
 
-const SideBar: FC = () => {
+const SideBar: FC = memo(() => {
     const {user} = useTypeSelector(selectorUser)
     const [isShow, setIsShow] = useState<boolean>(false)
     const navigate = useNavigate()
@@ -63,6 +63,6 @@ const SideBar: FC = () => {
             }
         </div>
     );
-};
+})
 
 export default SideBar;

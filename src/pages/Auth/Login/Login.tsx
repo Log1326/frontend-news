@@ -17,6 +17,6 @@ const Login: FC = () => {
             <FormAuth onSubmit={onSubmit} isLogin={false}/>
         </div>
     );
-};
+}
 
 export default Login;

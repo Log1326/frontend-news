@@ -1,17 +1,18 @@
-import React, {FC, useRef, useState} from 'react';
+import React, {FC, memo, useRef, useState} from 'react';
 import {SubmitHandler, useForm} from 'react-hook-form'
 import './form.css'
 import {IUser} from "../../store/user/types";
 import {NavLink} from 'react-router-dom'
 import {BiImageAdd} from "react-icons/bi";
 import {fileUpload} from "../../service/api";
+import {patternValueEmail} from "../../utils";
 
 interface props {
     isLogin: boolean
     onSubmit: SubmitHandler<IUser>
 }
 
-const FormAuth: FC<props> = ({isLogin, onSubmit}) => {
+const FormAuth: FC<props> = memo(({isLogin, onSubmit}) => {
     const [img, setImg] = useState<string>('')
     const {register, handleSubmit, formState: {errors}, watch, setValue} = useForm<IUser>()
     const passwordRef = useRef({});
@@ -58,7 +59,7 @@ const FormAuth: FC<props> = ({isLogin, onSubmit}) => {
                                {
                                    required: 'email is required',
                                    pattern: {
-                                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                       value: patternValueEmail,
                                        message: "invalid email address"
                                    }
                                })}
@@ -91,7 +92,7 @@ const FormAuth: FC<props> = ({isLogin, onSubmit}) => {
                             {
                                 required: 'email is required',
                                 pattern: {
-                                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                    value: patternValueEmail,
                                     message: "invalid email address"
                                 }
                             })}
@@ -127,6 +128,6 @@ const FormAuth: FC<props> = ({isLogin, onSubmit}) => {
 
         </form>
     );
-};
+})
 
 export default FormAuth;

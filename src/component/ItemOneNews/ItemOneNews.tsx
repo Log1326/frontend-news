@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, memo, useCallback, useMemo} from 'react';
 import './itemonenews.css'
 import {INews} from "../../store/news/types";
 import {AppDispatch} from "../../store/store";
@@ -14,9 +14,9 @@ interface Props {
     dispatch: AppDispatch
 }
 
-const ItemOneNews: FC<Props> = ({item, dispatch}) => {
-    const createAt = moment(item.createdAt).format('LLL')
-
+const ItemOneNews: FC<Props> = memo(({item, dispatch}) => {
+    const createAt = useMemo(() => moment(item.createdAt).format('LLL'), [])
+    const send = useCallback(() => dispatch(likesNews(item._id)), [item._id])
     return (
         <div className='containerNewsOne'>
             <div className='titleNewsOne'>
@@ -51,7 +51,7 @@ const ItemOneNews: FC<Props> = ({item, dispatch}) => {
                     </p>
                 </div>
                 <div className='likesAndViewsOneNews'>
-                    <div onClick={() => dispatch(likesNews(item._id))}
+                    <div onClick={send}
                          className='styleLikeByOneNews'>
                         {item.likes.length > 0 ?
                             <div className='likeHaveByOneNews'>
@@ -73,6 +73,6 @@ const ItemOneNews: FC<Props> = ({item, dispatch}) => {
             </div>
         </div>
     );
-};
+})
 
 export default ItemOneNews;

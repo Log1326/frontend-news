@@ -1,6 +1,6 @@
 .containerMapSkeleton {
     display: flex;
-    flex-flow: column;
+    flex-flow: row wrap;
     align-items: center;
 }
 

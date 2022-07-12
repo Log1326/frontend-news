@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, Suspense, lazy} from 'react';
 import {SubmitHandler} from "react-hook-form";
 import {IPublishNews} from "../../store/news/types";
 import {useTypeDispatch} from "../../store/store";
@@ -6,8 +6,9 @@ import {createNewsAction} from "../../store/news/newsAction";
 import {useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
 import './addnews.css'
-import {AddFormNews} from "../../component";
+import {BigLoad} from "../../ui/LoadingUI";
 
+const AddFormNews = lazy(() => import('../../component/AddFormNews/AddFormNews'))
 const AddNews: FC = () => {
     const dispatch = useTypeDispatch()
     const navigate = useNavigate()
@@ -16,9 +17,11 @@ const AddNews: FC = () => {
     }
     return (
         <div className='containerAddNews'>
-            <AddFormNews onSubmit={onSubmit}/>
+            <Suspense fallback={<BigLoad/>}>
+                <AddFormNews onSubmit={onSubmit}/>
+            </Suspense>
         </div>
     );
-};
+}
 
 export default AddNews;

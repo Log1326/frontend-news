@@ -6,9 +6,13 @@ import {Route, Routes} from 'react-router-dom'
 import {useTypeDispatch, useTypeSelector} from "../store/store";
 import {get_current_user} from "../store/user/userAction";
 import {Login, Registration} from "../pages/Auth";
-import {AddNews, AllNews, MyNewsDesk, NewsOneById, UpdateNews} from "../pages";
-import {Footer, Header, Layout} from "../component";
+import {AddNews, MyNewsDesk, NewsOneById, UpdateNews} from "../pages";
+import {Layout} from "../component";
 import {selectorUser} from "../store/user/selectorsUser";
+
+const AllNews = React.lazy(() => import('../pages/AllNews/AllNews'))
+const Header = React.lazy(() => import('../component/Header/Header'))
+const Footer = React.lazy(() => import('../component/Footer/Footer'))
 
 const MainRouter: FC = () => {
     const {user, error} = useTypeSelector(selectorUser)
@@ -44,6 +48,6 @@ const MainRouter: FC = () => {
             </div>
         </div>
     );
-};
+}
 
 export default MainRouter;
