@@ -60,7 +60,31 @@
 }
 
 .headerAvatar {
+    width: 3rem;
     height: 3rem;
     border-radius: 50%;
-    object-fit: contain;
+    object-fit: cover;
+}
+
+.iconEditHeader{
+    display: flex;
+    font-size: 1.5rem;
+    color: var(--color-purple);
+    gap: 1rem;
+}
+.iconEditHeader:hover{
+    color: var(--color-grey-text);
+    cursor: pointer;
+}
+
+
+.iconPersonHeader{
+    display: flex;
+    font-size: 1.5rem;
+    color: var(--color-purple);
+    gap: 1rem;
+}
+.iconPersonHeader:hover{
+    color: var(--color-grey-text);
+    cursor: pointer;
 }

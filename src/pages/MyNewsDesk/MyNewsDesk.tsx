@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useLayoutEffect} from 'react';
+import React, {FC, useEffect} from 'react';
 import './minenews.css'
 import {useTypeDispatch, useTypeSelector} from "../../store/store";
 import {getNewsByUserIdAction, removeNewsAction} from "../../store/news/newsAction";
@@ -17,9 +17,7 @@ const MyNewsDesk: FC = () => {
     const navigate = useNavigate()
     const page: number | null = options.currentPage !== null ? options.currentPage : 1
     const dispatch = useTypeDispatch()
-
-
-    useLayoutEffect(() => {
+    useEffect(() => {
         error && toast.error(error)
     }, [error])
     useEffect(() => {

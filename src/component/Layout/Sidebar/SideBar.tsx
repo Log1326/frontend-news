@@ -22,13 +22,13 @@ const SideBar: FC = memo(() => {
                             onClick={() => setIsShow(false)}
                         />
                     </div>
-                    <div onClick={() => navigate('/')}>
+                    <div>
                         <Link className='styleIconMenu' to={'/'}><TbNews/></Link>
                     </div>
                     {user &&
                         <>
                             <div>
-                                <Link className='styleIconMenu' to={`my_news/${user?._id}`}><ImNewspaper/></Link>
+                                <Link className='styleIconMenu' to={`/my_news/${user?._id}`}><ImNewspaper/></Link>
                             </div>
                             <div>
                                 <Link className='styleIconMenu' to={'/add_news'}><FaAddressCard/></Link>
@@ -42,13 +42,13 @@ const SideBar: FC = memo(() => {
                     <div className='trigger'>
                         <AiOutlineMenuFold onClick={() => setIsShow(true)}/>
                     </div>
-                    <Link className='linkText' to={'/'} onClick={() => navigate('/')}>
+                    <Link className='linkText' to={'/'}>
                         <span>All News</span>
                         <span className='linkTextIconsStyle'><TbNews/></span>
                     </Link>
                     {user &&
                         <>
-                            <Link className='linkText' to={`my_news/${user?._id}`}>
+                            <Link className='linkText' to={`/my_news/${user?._id}`}>
                                 <span>My News</span>
                                 <span className='linkTextIconsStyle'><ImNewspaper/></span>
                             </Link>

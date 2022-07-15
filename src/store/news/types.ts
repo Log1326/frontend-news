@@ -7,6 +7,8 @@ export interface newsStateNews {
         data: Items
         options: IOptions
     }
+    tagsNews: Items
+    tagsRelatedNews: Items
     options: IOptions
 }
 
@@ -98,5 +100,15 @@ export interface IRemoveNews {
 
 export interface KnowError {
     error: string
+}
+
+export interface ISearch {
+    searchQuery: string
+    navigate: NavigateFunction
+}
+
+export interface IGetAll {
+    page: number
+    navigate?: NavigateFunction
 }
 

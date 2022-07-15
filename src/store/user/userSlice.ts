@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {initialTypeState, statusUser} from "./types";
-import {get_all_users, get_current_user, sign_in, sign_up} from "./userAction";
+import {get_all_users, get_current_user, remove_user, sign_in, sign_up, update_user} from "./userAction";
 
 
 const initialState: initialTypeState = {
@@ -18,7 +18,9 @@ export const userSlice = createSlice({
             localStorage.clear()
             state.user = null
         },
-
+        setUser: (state, action) => {
+            state.user = JSON.parse(action.payload)
+        },
     },
     extraReducers: builder => {
         builder
@@ -29,6 +31,7 @@ export const userSlice = createSlice({
             .addCase(sign_in.fulfilled, (state, action) => {
                 state.user = action.payload.data
                 localStorage.setItem('token', action.payload.token)
+                localStorage.setItem('user', JSON.stringify(action.payload.data))
                 state.status = statusUser.loaded
                 state.error = null
             })
@@ -42,6 +45,7 @@ export const userSlice = createSlice({
             })
             .addCase(sign_up.fulfilled, (state, action) => {
                 state.user = action.payload.data
+                localStorage.setItem('user', JSON.stringify(action.payload.data))
                 localStorage.setItem('token', action.payload.token)
                 state.status = statusUser.loaded
                 state.error = null
@@ -61,9 +65,10 @@ export const userSlice = createSlice({
             })
             .addCase(get_current_user.rejected, (state, action) => {
                 state.status = statusUser.error
-                state.error = String(action.payload)
-                state.user = null
-                localStorage.clear()
+                if (action.payload === '403' || '402') {
+                    state.user = null
+                    localStorage.clear()
+                } else state.error = String(action.payload)
             })
             .addCase(get_all_users.pending, (state) => {
                 state.status = statusUser.loading
@@ -78,10 +83,39 @@ export const userSlice = createSlice({
                 state.status = statusUser.error
                 state.error = String(action.payload)
             })
+            .addCase(update_user.pending, (state) => {
+                state.status = statusUser.loading
+                state.error = null
+            })
+            .addCase(update_user.fulfilled, (state, action) => {
+                state.status = statusUser.loaded
+                localStorage.setItem('user', JSON.stringify(action.payload.data))
+                localStorage.setItem('token', action.payload.token)
+                state.user = action.payload.data
+                state.error = null
+            })
+            .addCase(update_user.rejected, (state, action) => {
+                state.status = statusUser.error
+                state.error = String(action.payload)
+            })
+            .addCase(remove_user.pending, (state) => {
+                state.status = statusUser.loading
+                state.error = null
+            })
+            .addCase(remove_user.fulfilled, (state) => {
+                state.status = statusUser.loaded
+                state.user = null
+                localStorage.clear()
+                state.error = null
+            })
+            .addCase(remove_user.rejected, (state, action) => {
+                state.status = statusUser.error
+                state.error = String(action.payload)
+            })
     }
 })
 
-export const {logout} = userSlice.actions
+export const {logout, setUser} = userSlice.actions
 export default userSlice.reducer
 
 

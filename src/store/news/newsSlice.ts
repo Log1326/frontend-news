@@ -3,7 +3,7 @@ import {newsStateNews, statusLoading} from "./types";
 import {
     createNewsAction,
     getAllNewsAction,
-    getNewsByUserIdAction, getOneNewsAction,
+    getNewsByUserIdAction, getOneNewsAction, getTagNewsAction, getTagsNewsRelatedAction,
     likesNews,
     removeNewsAction,
     searchNewsAction, updateNewsAction
@@ -31,6 +31,16 @@ const initialState: newsStateNews = {
             numberOfPages: null,
             totalNews: null,
         },
+    },
+    tagsNews: {
+        items: [],
+        status: null,
+        error: null,
+    },
+    tagsRelatedNews: {
+        items: [],
+        status: null,
+        error: null,
     },
     options: {
         currentPage: null,
@@ -129,6 +139,9 @@ const newsSlice = createSlice({
             .addCase(getNewsByUserIdAction.rejected, ({userNewsById}, action) => {
                 userNewsById.data.status = statusLoading.wrong
                 userNewsById.data.error = String(action.payload)
+                if (Number(action.payload) === 402 || 403) {
+                    localStorage.clear()
+                }
             })
             .addCase(removeNewsAction.pending, ({userNewsById}) => {
                 userNewsById.data.status = statusLoading.loading
@@ -174,8 +187,35 @@ const newsSlice = createSlice({
                 userNewsById.data.status = statusLoading.wrong
                 userNewsById.data.error = String(action.payload)
             })
+            .addCase(getTagNewsAction.pending, ({tagsNews}) => {
+                tagsNews.error = null
+                tagsNews.status = statusLoading.loading
+
+            })
+            .addCase(getTagNewsAction.fulfilled, ({tagsNews}, action) => {
+                tagsNews.error = null
+                tagsNews.status = statusLoading.loaded
+                tagsNews.items = action.payload
+            })
+            .addCase(getTagNewsAction.rejected, ({tagsNews}, action) => {
+                tagsNews.status = statusLoading.wrong
+                tagsNews.error = String(action.payload)
+            })
+            .addCase(getTagsNewsRelatedAction.pending, ({tagsRelatedNews}) => {
+                tagsRelatedNews.error = null
+                tagsRelatedNews.status = statusLoading.loading
+
+            })
+            .addCase(getTagsNewsRelatedAction.fulfilled, ({tagsRelatedNews}, action) => {
+                tagsRelatedNews.error = null
+                tagsRelatedNews.status = statusLoading.loaded
+                tagsRelatedNews.items = action.payload
+            })
+            .addCase(getTagsNewsRelatedAction.rejected, ({tagsRelatedNews}, action) => {
+                tagsRelatedNews.status = statusLoading.wrong
+                tagsRelatedNews.error = String(action.payload)
+            })
     }
 })
-
 export const {setCurrentPage, setCurrentPageByUser} = newsSlice.actions
 export default newsSlice.reducer

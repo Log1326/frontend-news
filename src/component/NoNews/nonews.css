@@ -1,10 +1,9 @@
-.noNews{
-    height: 75vh;
-    width: 70vw;
+.noNews {
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--color-grey-text);
     font-size: 2rem;
     gap: 1rem;
+    height: 500px;
 }

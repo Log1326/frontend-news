@@ -3,19 +3,20 @@ import * as api from '../../service/api'
 import {
     GetNewsAll,
     IByUserId,
-    IDataPublish,
+    IDataPublish, IGetAll,
     IGetNewsByUser,
     INews,
-    IRemoveNews,
+    IRemoveNews, ISearch,
     IUpdatePublish,
     KnowError
 } from "./types";
 
 
-export const getAllNewsAction = createAsyncThunk<GetNewsAll, number, { rejectValue: KnowError }>(
-    'news/getAllNews', async (page, {rejectWithValue}) => {
+export const getAllNewsAction = createAsyncThunk<GetNewsAll, IGetAll, { rejectValue: KnowError }>(
+    'news/getAllNews', async ({page, navigate}, {rejectWithValue}) => {
         try {
             const {data} = await api.get_all_news(page)
+            navigate && navigate(`?page=${page}`)
             return data
         } catch (err: any) {
             const error = err.request.response.replace(/['"{}]+/g, '')
@@ -42,11 +43,16 @@ export const getNewsByUserIdAction = createAsyncThunk<IGetNewsByUser, IByUserId,
             return data
         } catch (err: any) {
             const error = err.request.response.replace(/['"{}]+/g, '')
-            return rejectWithValue(error)
+            if (err.response.status === 402 || 403){
+                return rejectWithValue(err.response.status)
+            }else {
+                return rejectWithValue(error)
+
+            }
         }
     }
 )
-export const getTagNewsAction = createAsyncThunk<null, string, { rejectValue: KnowError }>(
+export const getTagNewsAction = createAsyncThunk<INews[], string, { rejectValue: KnowError }>(
     'news/getTagNews', async (tag, {rejectWithValue}) => {
         try {
             const {data} = await api.get_tags(tag)
@@ -57,11 +63,23 @@ export const getTagNewsAction = createAsyncThunk<null, string, { rejectValue: Kn
         }
     }
 )
+export const getTagsNewsRelatedAction = createAsyncThunk<INews[], string, { rejectValue: KnowError }>(
+    'news/getTagsRelatedNews', async (tags, {rejectWithValue}) => {
+        try {
+            const {data} = await api.get_related_tags(tags)
+            return data
+        } catch (err: any) {
+            const error = err.request.response.replace(/['"{}]+/g, '')
+            return rejectWithValue(error)
+        }
+    }
+)
 
-export const searchNewsAction = createAsyncThunk<INews[], string, { rejectValue: KnowError }>(
-    'news/searchNews', async (searchQuery, {rejectWithValue}) => {
+export const searchNewsAction = createAsyncThunk<INews[], ISearch, { rejectValue: KnowError }>(
+    'news/searchNews', async ({searchQuery, navigate}, {rejectWithValue}) => {
         try {
             const {data} = await api.search_news(searchQuery)
+            navigate(`/search?searchQuery=${searchQuery}`);
             return data
         } catch (err: any) {
             const error = err.request.response.replace(/['"{}]+/g, '')

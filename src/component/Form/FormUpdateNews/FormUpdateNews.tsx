@@ -1,14 +1,14 @@
 import React, {FC, memo, useEffect, useMemo, useState} from 'react';
-import './formupdate.css'
+import './formupdatenews.css'
 import {SubmitHandler, useForm} from "react-hook-form";
-import {INews, IPublishNews} from "../../store/news/types";
-import {_url, fileUpload} from "../../service/api";
+import {INews, IPublishNews} from "../../../store/news/types";
+import {_url, fileUpload} from "../../../service/api";
 import {BiImageAdd} from "react-icons/bi";
 import {NavigateFunction} from "react-router-dom";
-import imgUpload from '../../accept/imgUpload.png'
+import imgUpload from '../../../accept/imgUpload.png'
 import {buildStyles, CircularProgressbar} from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import {foundItem} from "../../utils";
+import {foundItem} from "../../../utils";
 
 interface Props {
     onSubmit: SubmitHandler<IPublishNews>
@@ -17,7 +17,7 @@ interface Props {
     navigate: NavigateFunction
 }
 
-const FormUpdate: FC<Props> = memo(({onSubmit, items, id, navigate}) => {
+const FormUpdateNews: FC<Props> = memo(({onSubmit, items, id, navigate}) => {
     const [img, setImg] = useState<string>('')
     const [isLoading, setLoading] = useState<number | null>(null)
     const item = useMemo(() => foundItem(items, id), [])
@@ -157,4 +157,4 @@ const FormUpdate: FC<Props> = memo(({onSubmit, items, id, navigate}) => {
     );
 })
 
-export default FormUpdate;
+export default FormUpdateNews;

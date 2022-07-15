@@ -26,7 +26,7 @@ const MyNewsDesk: FC<Props> = memo(({item, handleRemove, handleUpdate}) => {
                 </div>
                 <div>
                     <span>tags:</span>{item.tags.map((tag, index) =>
-                    <NavLink className='itemNavLinkMyNews' to={`/${tag}`} key={index}>{`#${tag}`}</NavLink>
+                    <NavLink className='itemNavLinkMyNews' to={`news/tags/${tag}`} key={index}>{`#${tag}`}</NavLink>
                 )}
                 </div>
                 <div className='itemMyNews'>

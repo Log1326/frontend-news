@@ -1,0 +1,129 @@
+
+.containerFieldAndImg {
+    display: flex;
+    flex-flow: row wrap;
+    box-sizing: border-box;
+    box-shadow: var(--form-box-shodow);
+    border-radius: 10px;
+}
+
+.removeUserStyle {
+    display: flex;
+    margin: 1rem;
+    font-size: 2rem;
+    color: var(--color-purple);
+    position: absolute;
+    cursor: pointer;
+}
+
+.containerFormUpdateUser {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    margin: 1rem;
+    padding: 1rem;
+    box-shadow: -9px 0 6px -6px rgba(34, 60, 80, 0.32) inset;
+}
+
+.containerFormUpdateUser > div > input {
+    font-size: 1rem;
+    padding: 1rem;
+    margin: 1rem;
+    outline: none;
+    border-radius: 15px;
+    border: 1px solid var(--color-light-grey);
+}
+
+.btnUpdateUser {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--color-light-grey);
+    background: none;
+    font-size: 1.2rem;
+    padding: .5rem;
+    width: 150px;
+    border-radius: 10px;
+    color: var(--color-purple);
+}
+
+.btnUpdateUser:hover {
+    cursor: pointer;
+    background: var(--color-purple);
+    color: var(--color-white-text);
+}
+
+
+.formUpdateImgAndButtonUser {
+    height: 320px;
+    display: flex;
+    flex-flow: wrap column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    margin-top: 1rem;
+    padding: 1rem;
+}
+
+.formUpdateImgAndButtonUser > button {
+    position: absolute;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--color-red-text);
+    padding: .6rem;
+}
+
+.formUpdateImgAndButtonUser > button:hover {
+    color: var(--color-grey-text);
+    cursor: pointer;
+}
+
+
+.formUpdateImgAndButtonUser > img {
+    border-radius: 1rem;
+    height: 320px;
+    width: 280px;
+    object-fit: fill;
+}
+
+.formUpdateLabelUser {
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.formUpdateFileInputUser {
+    display: none;
+}
+
+.formUpdateViewsElemUser {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 1rem;
+    padding: 10px;
+    color: var(--color-grey-text);
+    border: 1px solid var(--color-grey-text);
+    border-radius: 10px;
+    box-shadow: var(--form-box-shodow);
+    position: fixed;
+}
+
+.formUpdateViewsElemUser:hover {
+    background: var(--color-purple);
+    color: var(--color-white-text);
+    border: none;
+    border-radius: 6px;
+}
+
+.TitleUpdateProfile{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    font-size: 2rem;
+    color: var(--color-grey-text);
+    font-weight: bold;
+    margin-bottom: 2rem;
+}

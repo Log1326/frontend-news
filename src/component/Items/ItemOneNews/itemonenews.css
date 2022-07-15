@@ -50,6 +50,7 @@
 
 
 .imgStyle {
+    max-width: 600px;
     object-fit: fill;
     box-shadow: var(--form-box-shodow);
 }

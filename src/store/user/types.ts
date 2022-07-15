@@ -1,4 +1,6 @@
 import {NavigateFunction} from "react-router-dom";
+import {follower_user} from "./userAction";
+
 export interface initialTypeState {
     user: IUser | null
     users: IUsers[]
@@ -11,6 +13,7 @@ export enum statusUser {
     loaded = 'completed',
     error = 'error'
 }
+
 export interface IUser {
     firstName: string
     lastName: string
@@ -42,4 +45,25 @@ export interface IApi {
 
 export type KnownError = {
     error: string;
+}
+
+export interface IUpdateUser {
+    updateData: IUser
+    id: string
+    navigate: NavigateFunction
+    toast: any
+}
+export interface IUpdateData{
+    updateData: IUser
+    id: string
+}
+export interface IRemove{
+    id: string | undefined
+    navigate: NavigateFunction
+    toast: any
+}
+export interface IFollower{
+    id: string
+    navigate: NavigateFunction
+    toast: any
 }

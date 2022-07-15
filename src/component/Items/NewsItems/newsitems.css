@@ -72,7 +72,6 @@
     display: flex;
     flex-flow: wrap column;
     justify-content: center;
-    width: 100%;
 }
 
 .ItemNavLink {

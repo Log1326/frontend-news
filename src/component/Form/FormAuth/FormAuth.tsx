@@ -1,11 +1,11 @@
 import React, {FC, memo, useRef, useState} from 'react';
 import {SubmitHandler, useForm} from 'react-hook-form'
 import './form.css'
-import {IUser} from "../../store/user/types";
+import {IUser} from "../../../store/user/types";
 import {NavLink} from 'react-router-dom'
 import {BiImageAdd} from "react-icons/bi";
-import {fileUpload} from "../../service/api";
-import {patternValueEmail} from "../../utils";
+import {fileUpload} from "../../../service/api";
+import {patternValueEmail} from "../../../utils";
 
 interface props {
     isLogin: boolean

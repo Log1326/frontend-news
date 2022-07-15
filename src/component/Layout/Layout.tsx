@@ -1,4 +1,4 @@
-import React, {FC, lazy, memo, Suspense} from 'react';
+import React, {FC, lazy, memo, Suspense, useMemo} from 'react';
 import './layout.css'
 import {Outlet} from 'react-router-dom'
 import {useTypeSelector} from "../../store/store";
@@ -14,8 +14,9 @@ const Layout: FC = memo(() => {
     const users = useTypeSelector(selectorAllUsers)
     const {user} = useTypeSelector(selectorUser)
     const {items} = useTypeSelector(selectorAllNews)
-    const UsersFiltered = users.filter(item => item._id !== user?._id).slice(0, 5)
-    const UserFindItems = items.filter(item => item.creator === user?._id).map(item => item.tags).flat().slice(0, 5)
+    const UsersFiltered = useMemo(() => users.filter(item => item._id !== user?._id).slice(0, 5), [users])
+    const UserFindItems = useMemo(() =>
+            items.filter(item => item.creator === user?._id).map(item => item.tags).flat().slice(0, 5), [items])
     return (
         <div className='layoutContainer'>
             <Suspense fallback={<SmallLoad/>}>
@@ -23,6 +24,7 @@ const Layout: FC = memo(() => {
             </Suspense>
 
             <Outlet/>
+
             <Suspense fallback={<SmallLoad/>}>
                 <RightSide UsersFiltered={UsersFiltered} UserFindItems={UserFindItems}/>
             </Suspense>

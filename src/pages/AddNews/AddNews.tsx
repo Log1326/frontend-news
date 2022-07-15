@@ -8,7 +8,7 @@ import {toast} from "react-toastify";
 import './addnews.css'
 import {BigLoad} from "../../ui/LoadingUI";
 
-const AddFormNews = lazy(() => import('../../component/AddFormNews/AddFormNews'))
+const AddFormNews = lazy(() => import('../../component/Form/AddFormNews/AddFormNews'))
 const AddNews: FC = () => {
     const dispatch = useTypeDispatch()
     const navigate = useNavigate()

@@ -15,7 +15,7 @@ const RightSide: FC<Props> = memo(({UserFindItems, UsersFiltered}) => {
 
             <div className='tagsContainer'>
                 {UserFindItems.map((item, index) =>
-                    <NavLink key={index} className='rightSideNavLink' to={`/${item}`}>
+                    <NavLink key={index} className='rightSideNavLink' to={`news/tags/${item}`}>
                         <span>{`#${item}`}</span>
                     </NavLink>
                 )}

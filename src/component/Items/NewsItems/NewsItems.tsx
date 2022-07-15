@@ -1,24 +1,26 @@
 import React, {FC, memo, useCallback, useMemo} from 'react';
-import {INews} from "../../store/news/types";
+import {INews} from "../../../store/news/types";
 import './newsitems.css'
 import {BiLike} from 'react-icons/bi'
 import {GrView} from 'react-icons/gr'
 import {Link, NavLink} from "react-router-dom";
-import {_url} from "../../service/api";
-import {AppDispatch} from "../../store/store";
-import {likesNews} from "../../store/news/newsAction";
-import {excerpt, foundUser} from "../../utils";
-import {IUsers} from "../../store/user/types";
+import {_url} from "../../../service/api";
+import {AppDispatch} from "../../../store/store";
+import {likesNews} from "../../../store/news/newsAction";
+import {excerpt, foundUser} from "../../../utils";
+import {IUser, IUsers} from "../../../store/user/types";
 
 interface Props {
     item: INews
     dispatch: AppDispatch
     users: IUsers[]
+    user: IUser | null
 }
 
-const NewsItems: FC<Props> = memo(({item, users, dispatch}) => {
+const NewsItems: FC<Props> = memo(({item, users, user, dispatch}) => {
     const userMemo = useMemo(() => foundUser(users, item.creator), [])
     const likes = useCallback(() => dispatch(likesNews(item._id)), [])
+    const myLikes = useMemo(() => item.likes.find(item => item === user?._id), [item.likes])
     return (
         <div className='containerNewsItem'>
             <div className='itemNewsBorder'>
@@ -56,12 +58,12 @@ const NewsItems: FC<Props> = memo(({item, users, dispatch}) => {
                     <div className='tagsNewsItems'>
                         {item.tags.map((tag, index) =>
                             <NavLink className='ItemNavLink'
-                                     to={`/${tag}`} key={index}>{`#${tag}`}</NavLink>
+                                     to={`news/tags/${tag}`} key={index}>{`#${tag}`}</NavLink>
                         )}
                     </div>
                     <div className='likesAndView'>
                         <div onClick={likes} className='styleLike'>
-                            {item.likes.length > 0 ?
+                            {item.likes.length && !!myLikes ?
                                 <>
                                     <div className='likeHave'>
                                         <span>{item.likes.length}</span>

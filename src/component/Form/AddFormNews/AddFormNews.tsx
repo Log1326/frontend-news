@@ -1,9 +1,9 @@
 import React, {FC, FormEvent, memo, useEffect, useState,} from 'react';
 import './newsform.css'
 import {SubmitHandler, useForm} from 'react-hook-form'
-import {IPublishNews} from "../../store/news/types";
+import {IPublishNews} from "../../../store/news/types";
 import {BiImageAdd} from 'react-icons/bi'
-import {fileUpload} from "../../service/api";
+import {fileUpload} from "../../../service/api";
 import {buildStyles, CircularProgressbar} from "react-circular-progressbar";
 
 interface Props {

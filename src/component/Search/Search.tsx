@@ -9,7 +9,7 @@ interface Props {
 }
 
 const Search: FC<Props> = memo(({search, handleSubmit, setSearch}) => {
-    const onChange = useCallback((e: any) => setSearch(e.target.value), [])
+    const onChange = useCallback((e: any) => setSearch(e.target.value), [setSearch])
     return (
         <div className='containerSearch'>
             <input

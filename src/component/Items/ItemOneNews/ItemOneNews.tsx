@@ -1,22 +1,26 @@
 import React, {FC, memo, useCallback, useMemo} from 'react';
 import './itemonenews.css'
-import {INews} from "../../store/news/types";
-import {AppDispatch} from "../../store/store";
-import {_url} from "../../service/api";
+import {INews} from "../../../store/news/types";
+import {AppDispatch} from "../../../store/store";
+import {_url} from "../../../service/api";
 import {NavLink} from "react-router-dom";
 import moment from "moment";
 import {BiLike} from "react-icons/bi";
 import {GrView} from "react-icons/gr";
-import {likesNews} from "../../store/news/newsAction";
+import {likesNews} from "../../../store/news/newsAction";
+import {IUser} from "../../../store/user/types";
 
 interface Props {
     item: INews
     dispatch: AppDispatch
+    user: IUser | null
 }
 
-const ItemOneNews: FC<Props> = memo(({item, dispatch}) => {
+const ItemOneNews: FC<Props> = memo(({item, user, dispatch}) => {
     const createAt = useMemo(() => moment(item.createdAt).format('LLL'), [])
     const send = useCallback(() => dispatch(likesNews(item._id)), [item._id])
+    const myLikes = useMemo(() => item.likes.find(item => item === user?._id), [item.likes])
+
     return (
         <div className='containerNewsOne'>
             <div className='titleNewsOne'>
@@ -43,7 +47,7 @@ const ItemOneNews: FC<Props> = memo(({item, dispatch}) => {
                         {item.tags.map((tag, index) =>
                             <NavLink
                                 className='linKStyleOneNews'
-                                to={`/${tag}`}
+                                to={`news/tags/${tag}`}
                                 key={index}>
                                 {`#${tag}`}
                             </NavLink>
@@ -53,7 +57,7 @@ const ItemOneNews: FC<Props> = memo(({item, dispatch}) => {
                 <div className='likesAndViewsOneNews'>
                     <div onClick={send}
                          className='styleLikeByOneNews'>
-                        {item.likes.length > 0 ?
+                        {item.likes.length && !!myLikes ?
                             <div className='likeHaveByOneNews'>
                                 <span>{item.likes.length}</span>
                                 <BiLike/>
