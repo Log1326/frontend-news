@@ -10,6 +10,8 @@ export interface newsStateNews {
     tagsNews: Items
     tagsRelatedNews: Items
     options: IOptions
+    likes:Items
+    myTags:ITags
 }
 
 export interface IOptions {
@@ -23,7 +25,11 @@ export type Items = {
     status: statusLoading | null
     error: string | null
 }
-
+export type ITags ={
+    items: string[]
+    status: statusLoading | null
+    error: string | null
+}
 export enum statusLoading {
     loading = 'loading',
     loaded = 'completed',
@@ -112,3 +118,6 @@ export interface IGetAll {
     navigate?: NavigateFunction
 }
 
+export interface IFindLikes {
+    userId: string
+}

@@ -1,10 +1,11 @@
-import React, {FC, lazy, memo, Suspense, useMemo} from 'react';
+import React, {FC, lazy, memo, Suspense, useEffect, useMemo} from 'react';
 import './layout.css'
 import {Outlet} from 'react-router-dom'
-import {useTypeSelector} from "../../store/store";
+import {useTypeDispatch, useTypeSelector} from "../../store/store";
 import {selectorAllUsers, selectorUser} from "../../store/user/selectorsUser";
-import {selectorAllNews} from "../../store/news/selectorsNews";
+import {selectorAllNews, selectorMyTags} from "../../store/news/selectorsNews";
 import {SmallLoad} from "../../ui/LoadingUI";
+import {getMyTags} from "../../store/news/newsAction";
 
 const SideBar = lazy(() => import("./Sidebar/SideBar"))
 const RightSide = lazy(() => import("./RightSide/RightSide"))
@@ -13,10 +14,12 @@ const RightSide = lazy(() => import("./RightSide/RightSide"))
 const Layout: FC = memo(() => {
     const users = useTypeSelector(selectorAllUsers)
     const {user} = useTypeSelector(selectorUser)
-    const {items} = useTypeSelector(selectorAllNews)
+    const {items} = useTypeSelector(selectorMyTags)
+    const dispatch = useTypeDispatch()
     const UsersFiltered = useMemo(() => users.filter(item => item._id !== user?._id).slice(0, 5), [users])
-    const UserFindItems = useMemo(() =>
-            items.filter(item => item.creator === user?._id).map(item => item.tags).flat().slice(0, 5), [items])
+    useEffect(() => {
+        user?._id && dispatch(getMyTags(user?._id))
+    }, [user?._id])
     return (
         <div className='layoutContainer'>
             <Suspense fallback={<SmallLoad/>}>
@@ -26,7 +29,7 @@ const Layout: FC = memo(() => {
             <Outlet/>
 
             <Suspense fallback={<SmallLoad/>}>
-                <RightSide UsersFiltered={UsersFiltered} UserFindItems={UserFindItems}/>
+                <RightSide UsersFiltered={UsersFiltered} items={items}/>
             </Suspense>
         </div>
     );

@@ -6,15 +6,15 @@ import {IUsers} from "../../../store/user/types";
 
 interface Props {
     UsersFiltered: IUsers[]
-    UserFindItems: string[]
+    items: string[]
 }
 
-const RightSide: FC<Props> = memo(({UserFindItems, UsersFiltered}) => {
+const RightSide: FC<Props> = memo(({items, UsersFiltered}) => {
     return (
         <div className='containerRightSide'>
 
             <div className='tagsContainer'>
-                {UserFindItems.map((item, index) =>
+                {items.map((item, index) =>
                     <NavLink key={index} className='rightSideNavLink' to={`news/tags/${item}`}>
                         <span>{`#${item}`}</span>
                     </NavLink>

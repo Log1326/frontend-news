@@ -3,7 +3,7 @@ import * as api from '../../service/api'
 import {
     GetNewsAll,
     IByUserId,
-    IDataPublish, IGetAll,
+    IDataPublish, IFindLikes, IGetAll,
     IGetNewsByUser,
     INews,
     IRemoveNews, ISearch,
@@ -43,9 +43,9 @@ export const getNewsByUserIdAction = createAsyncThunk<IGetNewsByUser, IByUserId,
             return data
         } catch (err: any) {
             const error = err.request.response.replace(/['"{}]+/g, '')
-            if (err.response.status === 402 || 403){
+            if (err.response.status === 402 || 403) {
                 return rejectWithValue(err.response.status)
-            }else {
+            } else {
                 return rejectWithValue(error)
 
             }
@@ -63,6 +63,18 @@ export const getTagNewsAction = createAsyncThunk<INews[], string, { rejectValue:
         }
     }
 )
+export const getMyTags = createAsyncThunk<string[], string, { rejectValue: KnowError }>(
+    'news/getMyTags', async (userId, {rejectWithValue}) => {
+        try {
+            const {data} = await api.get_my_tags(userId)
+            return data
+        } catch (err: any) {
+            const error = err.request.response.replace(/['"{}]+/g, '')
+            return rejectWithValue(error)
+        }
+    }
+)
+
 export const getTagsNewsRelatedAction = createAsyncThunk<INews[], string, { rejectValue: KnowError }>(
     'news/getTagsRelatedNews', async (tags, {rejectWithValue}) => {
         try {
@@ -134,6 +146,18 @@ export const likesNews = createAsyncThunk<INews, string, { rejectValue: KnowErro
     'news/likesNews', async (id, {rejectWithValue}: any) => {
         try {
             const {data} = await api.like_news(id)
+            return data
+        } catch (err: any) {
+            const error = err.request.response.replace(/['"{}]+/g, '')
+            return rejectWithValue(error)
+        }
+    }
+)
+
+export const findLikes = createAsyncThunk<INews[], IFindLikes, { rejectValue: KnowError }>(
+    'news/findLikes', async ({userId}, {rejectWithValue}: any) => {
+        try {
+            const {data} = await api.find_likes(userId)
             return data
         } catch (err: any) {
             const error = err.request.response.replace(/['"{}]+/g, '')

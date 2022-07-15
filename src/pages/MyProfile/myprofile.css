@@ -1,0 +1,8 @@
+.container{
+    display: flex;
+    flex-flow: wrap column;
+}
+.imgControl {
+    width: 200px;
+    height: 200px;
+}

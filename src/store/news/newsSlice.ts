@@ -1,8 +1,8 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {newsStateNews, statusLoading} from "./types";
 import {
-    createNewsAction,
-    getAllNewsAction,
+    createNewsAction, findLikes,
+    getAllNewsAction, getMyTags,
     getNewsByUserIdAction, getOneNewsAction, getTagNewsAction, getTagsNewsRelatedAction,
     likesNews,
     removeNewsAction,
@@ -47,6 +47,16 @@ const initialState: newsStateNews = {
         numberOfPages: null,
         totalNews: null
     },
+    likes: {
+        items: [],
+        status: null,
+        error: null,
+    },
+    myTags: {
+        items: [],
+        status: null,
+        error: null,
+    }
 }
 const newsSlice = createSlice({
     name: 'news',
@@ -215,7 +225,37 @@ const newsSlice = createSlice({
                 tagsRelatedNews.status = statusLoading.wrong
                 tagsRelatedNews.error = String(action.payload)
             })
+            .addCase(findLikes.pending, ({likes}) => {
+                likes.error = null
+                likes.status = statusLoading.loading
+
+            })
+            .addCase(findLikes.fulfilled, ({likes}, action) => {
+                likes.error = null
+                likes.status = statusLoading.loaded
+                likes.items = action.payload
+            })
+            .addCase(findLikes.rejected, ({likes}, action) => {
+                likes.status = statusLoading.wrong
+                likes.error = String(action.payload)
+            })
+            .addCase(getMyTags.pending, ({myTags}) => {
+                myTags.error = null
+                myTags.status = statusLoading.loading
+
+            })
+            .addCase(getMyTags.fulfilled, ({myTags}, action) => {
+                myTags.error = null
+                myTags.status = statusLoading.loaded
+                myTags.items = action.payload
+            })
+            .addCase(getMyTags.rejected, ({myTags}, action) => {
+                myTags.status = statusLoading.wrong
+                myTags.error = String(action.payload)
+            })
     }
 })
+
+
 export const {setCurrentPage, setCurrentPageByUser} = newsSlice.actions
 export default newsSlice.reducer
