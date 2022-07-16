@@ -89,8 +89,8 @@
 .formUpdateLabelUser {
     cursor: pointer;
     display: flex;
-    align-items: flex-start;
     justify-content: center;
+    margin-top: 2rem;
 }
 
 .formUpdateFileInputUser {
@@ -118,7 +118,7 @@
     border-radius: 6px;
 }
 
-.TitleUpdateProfile{
+.TitleUpdateProfile {
     display: flex;
     justify-content: center;
     align-content: center;

@@ -24,7 +24,7 @@
 
 .containerFormLogin > input {
     padding: 1rem;
-    font-size: 15px;
+    font-size: .9rem;
     border: 0;
     border-bottom: 2px solid var(--color-light-grey);
     outline: none;
@@ -32,7 +32,7 @@
 
 .containerFormRegister > input {
     padding: 1rem;
-    font-size: 15px;
+    font-size: .9rem;
     border: 0;
     border-bottom: 2px solid var(--color-light-grey);
     outline: none;
@@ -43,17 +43,18 @@
     align-items: center;
 }
 
-.oneAndTwoInput > input {
+
+.oneAndTwoInput > div > input {
     padding: 1rem;
-    font-size: 15px;
-    width: 4.5rem;
+    font-size: .9rem;
+    width: 7rem;
     border: 0;
     border-bottom: 2px solid var(--color-light-grey);
     outline: none;
     margin: 1rem;
 }
 
-.containerForm > p {
+.errorFormAuth {
     color: var(--color-red-text);
     opacity: .4;
 }

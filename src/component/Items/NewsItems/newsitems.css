@@ -5,8 +5,8 @@
 
 .itemNewsBorder {
     padding: 2rem;
-    width: 20rem;
-    height: 25rem;
+    width: 25rem;
+    height: 30rem;
     border-radius: 12px;
     box-shadow: var(--form-box-shodow);
 }

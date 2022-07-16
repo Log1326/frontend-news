@@ -5,9 +5,12 @@ import {selectorTags} from "../../store/news/selectorsNews";
 import {toast} from "react-toastify";
 import {useParams} from "react-router-dom";
 import {getTagNewsAction} from "../../store/news/newsAction";
-import {_url} from "../../service/api";
+import {TagsItem} from "../../component";
+import {SearchLoad} from "../../ui/LoadingUI";
+import {selectorUser} from "../../store/user/selectorsUser";
 
 const TagsNews: FC = () => {
+    const {user} = useTypeSelector(selectorUser)
     const {items, status, error} = useTypeSelector(selectorTags)
     const {tag} = useParams()
     const dispatch = useTypeDispatch()
@@ -18,23 +21,15 @@ const TagsNews: FC = () => {
         tag && dispatch(getTagNewsAction(tag))
     }, [tag])
     return (
-        <div>
+        <div className='containerNewsTags'>
             {status === 'loading' ?
-                <div>loading</div>
+                <SearchLoad/>
                 :
-                <>
+                <div className='text'>
                     {items && items.map((item, index) =>
-                        <div key={item._id + index + 1 + item.tags}>
-                            <span>{item.title}</span>
-                            <span>{item.description}</span>
-                            <img src={_url + item.imageUrl} alt=""/>
-                            <span>{item.tags}</span>
-                            <span>{item.likes}</span>
-                            <span>{item.createdAt}</span>
-
-                        </div>
+                        <TagsItem item={item} user={user} dispatch={dispatch} key={`${item._id}__${index + 120}`}/>
                     )}
-                </>
+                </div>
             }
 
         </div>

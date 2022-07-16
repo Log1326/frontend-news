@@ -1,5 +1,5 @@
 import React, {FC, memo, useCallback, useMemo, useState} from 'react';
-import {NavLink, useNavigate} from 'react-router-dom'
+import {Link, NavLink, useNavigate} from 'react-router-dom'
 import './header.css'
 import {_url} from "../../service/api";
 import {BsPersonCircle} from "react-icons/bs";
@@ -10,8 +10,6 @@ import {getAllNewsAction, searchNewsAction} from "../../store/news/newsAction";
 import {selectorUser} from "../../store/user/selectorsUser";
 import {Search} from "../index";
 import {SmallLoad} from "../../ui/LoadingUI";
-import {BsFillFileEarmarkPersonFill} from 'react-icons/bs'
-import {FiEdit} from 'react-icons/fi'
 
 const Header: FC = memo(() => {
         const {user, status} = useTypeSelector(selectorUser)
@@ -40,26 +38,14 @@ const Header: FC = memo(() => {
                         <>
                             {status === 'loading' ? <SmallLoad/>
                                 :
-                                <div>
+                                <Link to={`/user/${user?._id}/update`} className='linkTextHeader'>
                                     <span className='namesHeader'>
                                         <span>{user?.firstName}</span>
                                         <span>{user?.lastName}</span>
                                         <img className='headerAvatar' src={_url + user.avatar}
                                              alt={String(user.avatar)}/>
-                                        <div
-                                            onClick={() => navigate(`/user/${user?._id}/update`)}
-                                            className='iconEditHeader'
-                                        >
-                                            <FiEdit/>
-                                        </div>
-                                        <div
-                                            onClick={() => navigate('/profile')}
-                                            className='iconPersonHeader'>
-                                            <BsFillFileEarmarkPersonFill/>
-                                        </div>
                                     </span>
-                                </div>
-
+                                </Link>
                             }
 
                         </>

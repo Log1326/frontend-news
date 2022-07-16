@@ -3,14 +3,12 @@ import './nonews.css'
 
 interface Props {
     children: React.ReactNode
-    searchQuery?: string | null
 }
 
-const NoNews: FC<Props> = ({children, searchQuery}) => {
+const NoNews: FC<Props> = ({children}) => {
     return (
         <div className='noNews'>
             {children}
-            {searchQuery && <span>{`"${searchQuery}"`}</span>}
         </div>
     );
 };

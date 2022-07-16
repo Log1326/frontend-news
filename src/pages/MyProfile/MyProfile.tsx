@@ -3,9 +3,13 @@ import './myprofile.css'
 import {useTypeDispatch, useTypeSelector} from "../../store/store";
 import {selectorUser} from "../../store/user/selectorsUser";
 import {selectorLikes, selectorUserNewsById} from "../../store/news/selectorsNews";
-import {_url} from "../../service/api";
 import {toast} from "react-toastify";
 import {findLikes, getNewsByUserIdAction} from "../../store/news/newsAction";
+import MyPost from "./MyPost/MyPost";
+import MyInfo from "./MyInfo/MyInfo";
+import MyLikePost from "./MyLikePost/MyLikePost";
+import MyFollow from "./MyFollow/MyFollow";
+import {SmallLoad} from "../../ui/LoadingUI";
 
 const MyProfile: FC = () => {
     const {user, status: userLoad, error} = useTypeSelector(selectorUser)
@@ -23,56 +27,47 @@ const MyProfile: FC = () => {
     }, [user?._id])
     return (
         <div className='container'>
-            My Profile
+            <div>{userLoad === 'loading' ? <SmallLoad/> : <MyInfo user={user}/>}</div>
             <div>
-                {userLoad === 'loading' ? <div>user loading</div>
+                {myPostLoad === 'loading' ? <SmallLoad/>
                     :
-                    <>
-                        <div>{user?.firstName}</div>
-                        <div>{user?.lastName}</div>
-                        <div>{user?.email}</div>
-                        <div>{user?.phone}</div>
-                        <img className='imgControl' src={_url + user?.avatar} alt=""/>
-                    </>
+                    <div>
+                        {myPost && myPost.map((item, index) =>
+                            <MyPost item={item} key={`${item._id}__${index + 123}`}/>)}
+                    </div>
                 }
             </div>
             <div>
-                My Post
-                {myPostLoad === 'loading' ? <div>loading</div>
+                {likeStatus === 'loading' ? <SmallLoad/>
                     :
-                    <>
-                        {myPost && myPost.map(item =>
-                            <div key={item._id + item.creator + `index__`}>
-                                <div>{item.title}</div>
-                                <div>{item.description}</div>
-                                <div>{item.likes.length}</div>
-                                <div>{item.viewsCount}</div>
-                                <img className='imgControl' src={_url + item.imageUrl} alt=""/>
-                            </div>
-                        )}
-                    </>
+                    <div>
+                        {myLikesPost && myLikesPost?.map((item, index) =>
+                            <MyLikePost item={item} key={item._id + index}/>)}
+                    </div>
                 }
-
             </div>
             <div>
-                My Like post
-                {likeStatus === 'loading' ? <div>'loading likes post</div>
+                {userLoad === 'loading' ? <SmallLoad/>
                     :
-                    <>
-                        {myLikesPost?.map((item, index) =>
-                            <div key={item._id + index}>
-                                <span>{item.title}</span>
-                                <span>{item.description}</span>
-                                <span>{item.creator}</span>
-                                <span>{item.tags}</span>
-                                <img className='imgControl' src={_url + item.imageUrl} alt={item.imageUrl}/>
-                            </div>
+                    <div>
+                        {user?.followers && user?.followers.map(item =>
+                            <MyFollow item={item} follow={true}/>
                         )}
-                    </>
+                    </div>
+                }
+            </div>
+            <div>
+                {userLoad === 'loading' ? <SmallLoad/>
+                    :
+                    <div>
+                        {user?.following && user?.following.map(item =>
+                            <MyFollow item={item} follow={false}/>
+                        )}
+                    </div>
                 }
             </div>
         </div>
     );
-};
+}
 
 export default MyProfile;

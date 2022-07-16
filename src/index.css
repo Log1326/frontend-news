@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 :root {
@@ -16,4 +17,5 @@
     rgba(213, 46, 239, 0.3) 0 30px 60px -30px,
     rgba(253, 230, 249, 0.35) 0 -2px 6px 0 inset;
     --box-shadow-inside: 26px 15px 62px 35px rgba(254, 174, 255, 0.26);
+    --box-shodow-border-all:  0 0 33px 4px rgba(34, 60, 80, 0.21) inset;;
 }

@@ -1,14 +1,12 @@
-import React, {FC, lazy, memo, Suspense, useEffect, useMemo} from 'react';
+import React, {FC, memo, useEffect, useMemo} from 'react';
 import './layout.css'
 import {Outlet} from 'react-router-dom'
 import {useTypeDispatch, useTypeSelector} from "../../store/store";
 import {selectorAllUsers, selectorUser} from "../../store/user/selectorsUser";
-import {selectorAllNews, selectorMyTags} from "../../store/news/selectorsNews";
-import {SmallLoad} from "../../ui/LoadingUI";
+import {selectorMyTags} from "../../store/news/selectorsNews";
 import {getMyTags} from "../../store/news/newsAction";
-
-const SideBar = lazy(() => import("./Sidebar/SideBar"))
-const RightSide = lazy(() => import("./RightSide/RightSide"))
+import SideBar from "./Sidebar/SideBar";
+import RightSide from "./RightSide/RightSide";
 
 
 const Layout: FC = memo(() => {
@@ -22,15 +20,9 @@ const Layout: FC = memo(() => {
     }, [user?._id])
     return (
         <div className='layoutContainer'>
-            <Suspense fallback={<SmallLoad/>}>
-                <SideBar/>
-            </Suspense>
-
+            <SideBar user={user}/>
             <Outlet/>
-
-            <Suspense fallback={<SmallLoad/>}>
-                <RightSide UsersFiltered={UsersFiltered} items={items}/>
-            </Suspense>
+            <RightSide UsersFiltered={UsersFiltered} items={items}/>
         </div>
     );
 })

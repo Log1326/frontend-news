@@ -18,8 +18,8 @@ interface Props {
 }
 
 const NewsItems: FC<Props> = memo(({item, users, user, dispatch}) => {
-    const userMemo = useMemo(() => foundUser(users, item.creator), [])
-    const likes = useCallback(() => dispatch(likesNews(item._id)), [])
+    const userMemo = useMemo(() => foundUser(users, item.creator), [item.creator])
+    const likes = useCallback(() => dispatch(likesNews(item._id)), [item._id])
     const myLikes = useMemo(() => item.likes.find(item => item === user?._id), [item.likes])
     return (
         <div className='containerNewsItem'>

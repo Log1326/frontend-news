@@ -1,0 +1,13 @@
+.containerNewsTags {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 80%;
+    margin: 1rem;
+    box-shadow: var(--form-box-shodow);
+    border-radius: 15px;
+    padding: .5rem;
+}
+.text{
+    width: 80%;
+}

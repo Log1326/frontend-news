@@ -1,5 +1,4 @@
 import {NavigateFunction} from "react-router-dom";
-import {follower_user} from "./userAction";
 
 export interface initialTypeState {
     user: IUser | null
@@ -21,6 +20,8 @@ export interface IUser {
     email: string
     password: string
     confirmPassword?: string
+    followers: string[]
+    following: string[]
     avatar: string
     _id: string
 }
@@ -29,6 +30,8 @@ export interface IUsers {
     firstName: string
     lastName: string
     avatar: string
+    followers: string[]
+    following: string[]
     _id: string
 }
 

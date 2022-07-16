@@ -22,13 +22,16 @@ const FormAuth: FC<props> = memo(({isLogin, onSubmit}) => {
             {isLogin ?
                 <>
                     <div className='oneAndTwoInput'>
-                        <input type='text' placeholder={'First name'}{...register("firstName",
-                            {required: isLogin})}/>
-                        {errors.firstName && <p>First name is required</p>}
-
-                        <input type='text' placeholder={'Last name'}{...register("lastName",
-                            {required: isLogin})}/>
-                        {errors.lastName && <p>Last name is required</p>}
+                        <div>
+                            <input type='text' placeholder={'First name'}{...register("firstName",
+                                {required: isLogin})}/>
+                            {errors.firstName && <p className='errorFormAuth'>First name is required</p>}
+                        </div>
+                        <div>
+                            <input type='text' placeholder={'Last name'}{...register("lastName",
+                                {required: isLogin})}/>
+                            {errors.lastName && <p className='errorFormAuth'>Last name is required</p>}
+                        </div>
                     </div>
 
                     <input type='text' placeholder={'Phone'}{...register("phone", {required: false})}/>
@@ -64,23 +67,27 @@ const FormAuth: FC<props> = memo(({isLogin, onSubmit}) => {
                                    }
                                })}
                     />
-                    {errors.email && <p>{errors.email.message}</p>}
+                    {errors.email && <p className='errorFormAuth'>{errors.email.message}</p>}
 
                     <div className='oneAndTwoInput'>
-                        <input type="password" placeholder={'Password'}
-                               {...register("password",
-                                   {
-                                       required: "You must specify a password",
-                                       minLength: {value: 4, message: "Password must have at least 4 characters"}
-                                   })}/>
-                        {errors.password && <p>{errors.password.message}</p>}
-                        <input type="password" placeholder={'Confirm'}
-                               {...register("confirmPassword",
-                                   {
-                                       required: true,
-                                       validate: value => value === passwordRef.current || "The passwords do not match"
-                                   })}/>
-                        {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
+                        <div>
+                            <input type="password" placeholder={'Password'}
+                                   {...register("password",
+                                       {
+                                           required: "You must specify a password",
+                                           minLength: {value: 4, message: "Password must have at least 4 characters"}
+                                       })}/>
+                            {errors.password && <p className='errorFormAuth'>{errors.password.message}</p>}
+                        </div>
+                        <div>
+                            <input type="password" placeholder={'Confirm'}
+                                   {...register("confirmPassword",
+                                       {
+                                           required: true,
+                                           validate: value => value === passwordRef.current || "The passwords do not match"
+                                       })}/>
+                            {errors.confirmPassword && <p className='errorFormAuth'>{errors.confirmPassword.message}</p>}
+                        </div>
                     </div>
                 </>
                 :
@@ -97,7 +104,7 @@ const FormAuth: FC<props> = memo(({isLogin, onSubmit}) => {
                                 }
                             })}
                     />
-                    {errors.email && <p>{errors.email.message}</p>}
+                    {errors.email && <p className='errorFormAuth'>{errors.email.message}</p>}
 
                     <input type="password" placeholder={'Password'}
                            {...register("password",
@@ -105,14 +112,14 @@ const FormAuth: FC<props> = memo(({isLogin, onSubmit}) => {
                                    required: "You must specify a password",
                                    minLength: {value: 4, message: "Password must have at least 4 characters"}
                                })}/>
-                    {errors.password && <p>{errors.password.message}</p>}
+                    {errors.password && <p className='errorFormAuth'>{errors.password.message}</p>}
                     <input type="password" placeholder={'Confirm'}
                            {...register("confirmPassword",
                                {
                                    required: true,
                                    validate: value => value === passwordRef.current || "The passwords do not match"
                                })}/>
-                    {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
+                    {errors.confirmPassword && <p className='errorFormAuth'>{errors.confirmPassword.message}</p>}
                 </>
             }
 

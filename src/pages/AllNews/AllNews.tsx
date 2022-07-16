@@ -1,7 +1,7 @@
-import React, {FC, Suspense, useEffect} from 'react';
+import React, {FC, useEffect} from 'react';
 import './allnews.css'
 import {toast} from "react-toastify";
-import {SearchLoad, SkeletonLoad} from "../../ui/LoadingUI";
+import {SkeletonLoad} from "../../ui/LoadingUI";
 import {useLocation, useNavigate} from "react-router-dom";
 import {useTypeDispatch, useTypeSelector} from "../../store/store";
 import {getAllNewsAction} from "../../store/news/newsAction";
@@ -10,9 +10,8 @@ import {useQuery} from "../../utils";
 import {get_all_users} from "../../store/user/userAction";
 import {selectorUser} from "../../store/user/selectorsUser";
 import {selectorAllNews, selectorOptions} from "../../store/news/selectorsNews";
-import {NoNews, Pagination} from "../../component";
+import {NewsItems, NoNews, Pagination} from "../../component";
 
-const NewsItems = React.lazy(() => import('../../component/Items/NewsItems/NewsItems'))
 
 const AllNews: FC = () => {
     const {user, users} = useTypeSelector(selectorUser)
@@ -39,33 +38,34 @@ const AllNews: FC = () => {
         <div className='containerAllNews'>
             {status === 'loading' ? <SkeletonLoad/> :
                 <>
-                    <Suspense fallback={<SearchLoad/>}>
-                        <div className='itemNewsContainer'>
-                            {items && items.map(item =>
-                                <NewsItems dispatch={dispatch}
-                                           users={users}
-                                           user={user}
-                                           key={`${item._id}-${item.createdAt}`}
-                                           item={item}/>)}
-                        </div>
-                    </Suspense>
+                    <div className='itemNewsContainer'>
+                        {items && items.map(item =>
+                            <NewsItems dispatch={dispatch}
+                                       users={users}
+                                       user={user}
+                                       key={`${item._id}-${item.createdAt}`}
+                                       item={item}/>)}
+                    </div>
                     <div>
                         {items?.length === 0 && location.pathname === '/' &&
-                            <NoNews children={'There are no news!'}/>}
+                            <NoNews>There are no news!</NoNews>}
                     </div>
                     <div>
                         {items?.length === 0 && location.pathname !== '/' &&
-                            <NoNews children={'We couldn\'t find any matches for: '} searchQuery={searchQuery}/>}
+                            <NoNews>We couldn't find any matches for: {searchQuery}</NoNews>
+                        }
                     </div>
-                    {items && items?.length > 0 && !searchQuery &&
-                        <div className='paginationPosition'>
-                            <Pagination
-                                options={options}
-                                setCurrentPage={setCurrentPage}
-                                dispatch={dispatch}
-                            />
-                        </div>
-                    }
+                    <div>
+                        {items && items?.length > 0 && !searchQuery &&
+                            <div className='paginationPosition'>
+                                <Pagination
+                                    options={options}
+                                    setCurrentPage={setCurrentPage}
+                                    dispatch={dispatch}
+                                />
+                            </div>
+                        }
+                    </div>
                 </>
             }
         </div>

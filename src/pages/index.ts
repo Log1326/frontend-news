@@ -8,4 +8,5 @@ export {default as Registration} from './Auth/Registration/Registration'
 export {default as MyProfile} from './MyProfile/MyProfile'
 export {default as AllNews} from './AllNews/AllNews'
 export {default as UpdateProfile} from './UpdateProfile/UpdateProfile'
+export {default as Layout} from '../pages/Layout/Layout'
 

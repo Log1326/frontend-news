@@ -17,10 +17,9 @@ interface Props {
 }
 
 const ItemOneNews: FC<Props> = memo(({item, user, dispatch}) => {
-    const createAt = useMemo(() => moment(item.createdAt).format('LLL'), [])
+    const createAt = useMemo(() => moment(item.createdAt).format('LLL'), [item.createdAt])
     const send = useCallback(() => dispatch(likesNews(item._id)), [item._id])
     const myLikes = useMemo(() => item.likes.find(item => item === user?._id), [item.likes])
-
     return (
         <div className='containerNewsOne'>
             <div className='titleNewsOne'>

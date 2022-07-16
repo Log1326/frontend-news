@@ -117,8 +117,11 @@ const newsSlice = createSlice({
                 userNewsById.data.status = statusLoading.loading
                 userNewsById.data.error = null
             })
-            .addCase(likesNews.pending, ({allNews}) => {
+            .addCase(likesNews.pending, ({allNews,oneNewsById, tagsNews}) => {
                 allNews.error = null
+                oneNewsById.error = null
+                tagsNews.error = null
+
             })
             .addCase(likesNews.fulfilled, ({allNews, oneNewsById}, action) => {
                 allNews.status = statusLoading.loaded
@@ -133,10 +136,11 @@ const newsSlice = createSlice({
                         oneNewsById.items.map(item => item._id === userId ? action.payload : item)
                 }
             })
-            .addCase(likesNews.rejected, ({allNews, oneNewsById}, action) => {
+            .addCase(likesNews.rejected, ({allNews, oneNewsById, tagsNews}, action) => {
                 allNews.status = statusLoading.wrong
                 oneNewsById.error = String(action.payload)
                 allNews.error = String(action.payload)
+                tagsNews.error = String(action.payload)
             })
             .addCase(getNewsByUserIdAction.fulfilled, ({userNewsById}, action) => {
                 userNewsById.data.status = statusLoading.loaded

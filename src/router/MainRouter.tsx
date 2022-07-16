@@ -1,4 +1,4 @@
-import React, {FC, lazy, useEffect, Suspense} from 'react';
+import React, {FC, useEffect} from 'react';
 import {toast, ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import './mainrouter.css'
@@ -7,15 +7,21 @@ import {useTypeDispatch, useTypeSelector} from "../store/store";
 import {get_current_user} from "../store/user/userAction";
 import {selectorUser} from "../store/user/selectorsUser";
 import {logout, setUser} from "../store/user/userSlice";
-import {Layout, TagsRelatedNews} from "../component";
-import {AddNews, Login, MyNewsDesk, NewsOneById, Registration, TagsNews, UpdateNews, UpdateProfile} from "../pages";
+import {Footer, Header, TagsRelatedNews} from "../component";
+import {
+    AddNews,
+    AllNews, Layout,
+    Login,
+    MyNewsDesk,
+    MyProfile,
+    NewsOneById,
+    Registration,
+    TagsNews,
+    UpdateNews,
+    UpdateProfile
+} from "../pages";
 import jwt_decode from "jwt-decode";
 
-
-const MyProfile = lazy(() => import('../pages/MyProfile/MyProfile'))
-const AllNews = lazy(() => import('../pages/AllNews/AllNews'))
-const Header = lazy(() => import('../component/Header/Header'))
-const Footer = lazy(() => import('../component/Footer/Footer'))
 
 const MainRouter: FC = () => {
     const {user, error} = useTypeSelector(selectorUser)
@@ -52,11 +58,7 @@ const MainRouter: FC = () => {
                                 <Route path={'my_news/:userId'} element={<MyNewsDesk/>}/>
                                 <Route path={'update/:id'} element={<UpdateNews/>}/>
                                 <Route path={'user/:id/update'} element={<UpdateProfile/>}/>
-                                <Route path={'profile'} element={
-                                    <Suspense fallback={<div>loading</div>}>
-                                        <MyProfile/>
-                                    </Suspense>
-                                }/>
+                                <Route path={'profile'} element={<MyProfile/>}/>
                             </>
                         }
                     </Route>

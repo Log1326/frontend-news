@@ -4,15 +4,16 @@ import {FaAddressCard} from 'react-icons/fa'
 import {ImNewspaper} from 'react-icons/im'
 import {TbNews} from 'react-icons/tb'
 import './sidebar.css'
-import {Link, useNavigate} from 'react-router-dom'
-import {useTypeSelector} from "../../../store/store";
-import {selectorUser} from "../../../store/user/selectorsUser";
+import {Link} from 'react-router-dom'
+import {BsFillFileEarmarkPersonFill} from "react-icons/bs";
+import {IUser} from "../../../store/user/types";
 
+interface Props {
+    user: IUser | null
+}
 
-const SideBar: FC = memo(() => {
-    const {user} = useTypeSelector(selectorUser)
+const SideBar: FC<Props> = memo(({user}) => {
     const [isShow, setIsShow] = useState<boolean>(false)
-    const navigate = useNavigate()
     return (
         <div className='sideBarContainer'>
             {isShow ?
@@ -22,6 +23,13 @@ const SideBar: FC = memo(() => {
                             onClick={() => setIsShow(false)}
                         />
                     </div>
+
+                    {user &&
+                        <div>
+                            <Link className='styleIconMenu' to={`/profile`}> <BsFillFileEarmarkPersonFill/></Link>
+                        </div>
+                    }
+
                     <div>
                         <Link className='styleIconMenu' to={'/'}><TbNews/></Link>
                     </div>
@@ -33,15 +41,19 @@ const SideBar: FC = memo(() => {
                             <div>
                                 <Link className='styleIconMenu' to={'/add_news'}><FaAddressCard/></Link>
                             </div>
+
                         </>
                     }
-
                 </div>
                 :
                 <div>
                     <div className='trigger'>
                         <AiOutlineMenuFold onClick={() => setIsShow(true)}/>
                     </div>
+                    <Link to={'/profile'} className='linkText'>
+                        <span>Profile</span>
+                        <span className='linkTextIconsStyle'>  <BsFillFileEarmarkPersonFill/></span>
+                    </Link>
                     <Link className='linkText' to={'/'}>
                         <span>All News</span>
                         <span className='linkTextIconsStyle'><TbNews/></span>
@@ -58,7 +70,6 @@ const SideBar: FC = memo(() => {
                             </Link>
                         </>
                     }
-
                 </div>
             }
         </div>

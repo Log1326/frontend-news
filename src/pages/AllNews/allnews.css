@@ -1,12 +1,12 @@
 .containerAllNews {
     padding: 1rem;
     width: 100%;
-
 }
 
 .itemNewsContainer {
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
     align-items: center;
 }
 

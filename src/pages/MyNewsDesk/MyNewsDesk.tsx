@@ -39,7 +39,7 @@ const MyNewsDesk: FC = () => {
                                                                  item={item} key={item.createdAt + item._id}/>)}
                     </div>
                     <div>
-                        {items?.length === 0 && <NoNews>{`There are not your news`}</NoNews>}
+                        {items?.length === 0 && <NoNews>There are not your news</NoNews>}
                     </div>
                     {items && items?.length > 0 &&
                         <div className='paginationPositionMyNews'>

@@ -3,8 +3,6 @@
     justify-content: space-evenly;
     flex-wrap: wrap;
     align-items: center;
-    width: calc(95vw - 1rem);
-    height: 5vh;
     padding: 2rem;
     background-color: var(--color-pink-sweet);
     position: center;
@@ -13,7 +11,7 @@
 
 .namesHeader {
     color: var(--color-grey-text);
-    cursor: default;
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -64,6 +62,17 @@
     height: 3rem;
     border-radius: 50%;
     object-fit: cover;
+}
+.linkTextHeader {
+    text-decoration-line: none;
+    color: var(--color-grey-text);
+    display: flex;
+    gap: 1rem;
+    font-size: 1rem;
+}
+.linkTextHeader:hover{
+    cursor: pointer;
+
 }
 
 .iconEditHeader{

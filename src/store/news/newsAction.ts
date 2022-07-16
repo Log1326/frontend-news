@@ -59,6 +59,7 @@ export const getTagNewsAction = createAsyncThunk<INews[], string, { rejectValue:
             return data
         } catch (err: any) {
             const error = err.request.response.replace(/['"{}]+/g, '')
+            console.log(err)
             return rejectWithValue(error)
         }
     }
