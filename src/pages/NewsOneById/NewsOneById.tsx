@@ -5,13 +5,13 @@ import {useParams} from "react-router-dom";
 import {getOneNewsAction} from "../../store/news/newsAction";
 import {SearchLoad} from "../../ui/LoadingUI";
 import {toast} from "react-toastify";
-import {selectorOneNewsById} from "../../store/news/selectorsNews";
+import {oneNewsById} from "../../store/news/selectorsNews";
 import {ItemOneNews} from "../../component";
-import {selectorUser} from "../../store/user/selectorsUser";
+import {user} from "../../store/user/selectorsUser";
 
 const NewsOneById: FC = () => {
-    const {items, status, error} = useTypeSelector(selectorOneNewsById)
-    const {user} = useTypeSelector(selectorUser)
+    const {items, status, error} = useTypeSelector(oneNewsById)
+    const userData = useTypeSelector(user)
     const {id} = useParams()
     const dispatch = useTypeDispatch()
     useEffect(() => {
@@ -29,7 +29,7 @@ const NewsOneById: FC = () => {
                 :
                 <div>
                     {items && items.map(item =>
-                        <ItemOneNews item={item} user={user} key={item._id + item.createdAt} dispatch={dispatch}/>)}
+                        <ItemOneNews item={item} user={userData} key={item._id + item.createdAt} dispatch={dispatch}/>)}
                 </div>
             }
 

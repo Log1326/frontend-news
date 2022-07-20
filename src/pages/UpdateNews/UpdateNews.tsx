@@ -7,10 +7,10 @@ import {IPublishNews, IUpdatePublish} from "../../store/news/types";
 import {updateNewsAction} from "../../store/news/newsAction";
 import {toast} from "react-toastify";
 import {FormUpdate} from "../../component";
-import {selectorUserNewsById} from "../../store/news/selectorsNews";
+import {newsByUserId} from "../../store/news/selectorsNews";
 
 const UpdateNews: FC = () => {
-    const {data: {items, error}} = useTypeSelector(selectorUserNewsById)
+    const {data: {items, error}} = useTypeSelector(newsByUserId)
     const {id} = useParams()
     const dispatch = useTypeDispatch()
     const navigate = useNavigate()

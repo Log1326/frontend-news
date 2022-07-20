@@ -1,6 +1,7 @@
 import axios from 'axios'
 import {IUpdateData, IUser} from "../store/user/types";
 import {IByUserId, IPublishNews, IUpdateSend, IUploadFile} from "../store/news/types";
+import {IChatData, IFindChat, IMessageData} from "../store/chat/types";
 
 export const _url = `http://localhost:5000`
 const _api = axios.create({baseURL: _url})
@@ -18,6 +19,8 @@ _api.interceptors.request.use((config) => {
 export const sign_in_api = (formData: IUser) => _api.post('/auth/signin', formData)
 export const sign_up_api = (formData: IUser) => _api.post('/auth/signup', formData)
 export const get_current_user = () => _api.get('/user') //auth
+export const getUserById = (id: string) => _api.get(`/user/${id}`) //auth
+
 export const getAllUsers = () => _api.get(`/users`)
 export const updateUser = ({updateData, id}: IUpdateData) => _api.put(`/user/${id}/update`, updateData)//auth
 export const deleteUser = (id: string) => _api.delete(`/user/${id}/remove`)//auth
@@ -35,7 +38,13 @@ export const update_news = ({newsData, id}: IUpdateSend) => _api.put(`/news/upda
 export const search_news = (searchQuery: string) => _api.get(`/news/find/search?searchQuery=${searchQuery}`)
 export const like_news = (id: string) => _api.patch(`/news/like/${id}`) //auth
 export const find_likes = (userId: string) => _api.get(`/news/like/${userId}`) //auth
-
+//chat endpoints
+export const create_chat = (chatData: IChatData) => _api.post(`/chat`, chatData)
+export const user_chat = (userId: string) => _api.get(`/chat/${userId}`)
+export const find_chat = ({firstId, secondId}: IFindChat) => _api.get(`/chat/find/${firstId}/${secondId}`)
+//message endpoints
+export const add_message = (messageData: { sendId: string | undefined; chatId: string | undefined; text: string }) => _api.post(`/message`, messageData)
+export const get_message = (chatId: string) => _api.get(`/message/${chatId}`)
 //file uploads
 export const fileUpload = ({formData, setLoading}: IUploadFile) => _api.post('/file/upload', formData, {
     onUploadProgress: progressEvent => {

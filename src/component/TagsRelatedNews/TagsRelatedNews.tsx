@@ -1,12 +1,12 @@
 import React, {FC, useEffect} from 'react';
 import './tagsrelatednews.css'
 import {useTypeSelector} from "../../store/store";
-import {selectorTagsRelated} from "../../store/news/selectorsNews";
+import {tagsRelated} from "../../store/news/selectorsNews";
 import {toast} from "react-toastify";
 import {_url} from "../../service/api";
 
 const TagsRelatedNews: FC = () => {
-    const {items, status, error} = useTypeSelector(selectorTagsRelated)
+    const {items, status, error} = useTypeSelector(tagsRelated)
     useEffect(() => {
         error && toast.error(error)
     }, [error])

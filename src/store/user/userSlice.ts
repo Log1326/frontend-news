@@ -1,11 +1,12 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {initialTypeState, statusUser} from "./types";
-import {get_all_users, get_current_user, remove_user, sign_in, sign_up, update_user} from "./userAction";
+import {get_all_users, get_current_user, getUserById, remove_user, sign_in, sign_up, update_user} from "./userAction";
 
 
 const initialState: initialTypeState = {
     user: null,
     users: [],
+    oneUser: null,
     status: null,
     error: '',
 }
@@ -112,9 +113,21 @@ export const userSlice = createSlice({
                 state.status = statusUser.error
                 state.error = String(action.payload)
             })
+            .addCase(getUserById.pending, (state) => {
+                state.status = statusUser.loading
+                state.error = null
+            })
+            .addCase(getUserById.fulfilled, (state, action) => {
+                state.oneUser = action.payload
+                state.status = statusUser.loaded
+                state.error = state.error = null
+            })
+            .addCase(getUserById.rejected, (state, action) => {
+                state.status = statusUser.error
+                state.error = String(action.payload)
+            })
     }
 })
-
 export const {logout, setUser} = userSlice.actions
 export default userSlice.reducer
 

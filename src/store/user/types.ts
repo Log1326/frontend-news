@@ -3,6 +3,7 @@ import {NavigateFunction} from "react-router-dom";
 export interface initialTypeState {
     user: IUser | null
     users: IUsers[]
+    oneUser:IUser | null
     status: statusUser | null
     error: string | null
 }

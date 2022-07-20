@@ -11,9 +11,9 @@ import {
 
 const initialState: newsStateNews = {
     oneNewsById: {
-        items: [],
-        status: null,
-        error: null,
+            items: [],
+            status: null,
+            error: null,
     },
     allNews: {
         items: [],

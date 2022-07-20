@@ -7,12 +7,12 @@ import {toast} from "react-toastify";
 import {BigLoad} from "../../ui/LoadingUI";
 import {useNavigate} from "react-router-dom";
 import {MyNewsDesc, NoNews, Pagination} from "../../component";
-import {selectorUser} from "../../store/user/selectorsUser";
-import {selectorUserNewsById} from "../../store/news/selectorsNews";
+import {user} from "../../store/user/selectorsUser";
+import {newsByUserId} from "../../store/news/selectorsNews";
 
 const MyNewsDesk: FC = () => {
-    const {user} = useTypeSelector(selectorUser)
-    const {data, options} = useTypeSelector(selectorUserNewsById)
+    const userData = useTypeSelector(user)
+    const {data, options} = useTypeSelector(newsByUserId)
     const {items, status, error} = data
     const navigate = useNavigate()
     const page: number | null = options.currentPage !== null ? options.currentPage : 1
@@ -21,8 +21,8 @@ const MyNewsDesk: FC = () => {
         error && toast.error(error)
     }, [error])
     useEffect(() => {
-        user?._id && dispatch(getNewsByUserIdAction({userId: user?._id, page}))
-    }, [user?._id])
+        userData?._id && dispatch(getNewsByUserIdAction({userId: userData?._id, page}))
+    }, [userData?._id])
     useEffect(() => {
         page && navigate(`?page=${page}?totalCountNews=${options.totalNews}?numberOfPages=${options.numberOfPages}`)
     }, [page])

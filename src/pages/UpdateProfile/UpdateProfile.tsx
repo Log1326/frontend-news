@@ -7,10 +7,10 @@ import {update_user} from "../../store/user/userAction";
 import {toast} from "react-toastify";
 import './updateUser.css'
 import FormUpdateUser from "../../component/Form/FormUpdateUser/FormUpdateUser";
-import {selectorUser} from "../../store/user/selectorsUser";
+import {user} from "../../store/user/selectorsUser";
 
 const UpdateProfile: FC = () => {
-    const {user} = useTypeSelector(selectorUser)
+    const userData = useTypeSelector(user)
     const {id} = useParams()
     const dispatch = useTypeDispatch()
     const navigate = useNavigate()
@@ -18,7 +18,7 @@ const UpdateProfile: FC = () => {
         dispatch(update_user({updateData, id, navigate, toast} as IUpdateUser))
     return (
         <div className='containerUpdateUser'>
-            <FormUpdateUser onSubmit={onSubmit} user={user} navigate={navigate} dispatch={dispatch} id={id}/>
+            <FormUpdateUser onSubmit={onSubmit} user={userData} navigate={navigate} dispatch={dispatch} id={id}/>
         </div>
     );
 };

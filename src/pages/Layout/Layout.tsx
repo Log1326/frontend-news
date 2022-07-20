@@ -1,28 +1,38 @@
-import React, {FC, memo, useEffect, useMemo} from 'react';
+import React, {FC, lazy, memo, Suspense, useEffect, useMemo} from 'react';
 import './layout.css'
 import {Outlet} from 'react-router-dom'
 import {useTypeDispatch, useTypeSelector} from "../../store/store";
-import {selectorAllUsers, selectorUser} from "../../store/user/selectorsUser";
-import {selectorMyTags} from "../../store/news/selectorsNews";
+import {user, users} from "../../store/user/selectorsUser";
+import {myTags} from "../../store/news/selectorsNews";
 import {getMyTags} from "../../store/news/newsAction";
-import SideBar from "./Sidebar/SideBar";
-import RightSide from "./RightSide/RightSide";
+import {SmallLoad} from "../../ui/LoadingUI";
 
+const SideBar = lazy(() => import('./Sidebar/SideBar'))
+const RightSide = lazy(() => import('./RightSide/RightSide'))
 
 const Layout: FC = memo(() => {
-    const users = useTypeSelector(selectorAllUsers)
-    const {user} = useTypeSelector(selectorUser)
-    const {items} = useTypeSelector(selectorMyTags)
+    const userData = useTypeSelector(user)
+    const usersData = useTypeSelector(users)
+    const {items} = useTypeSelector(myTags)
+
     const dispatch = useTypeDispatch()
-    const UsersFiltered = useMemo(() => users.filter(item => item._id !== user?._id).slice(0, 5), [users])
+
+    const UsersFiltered = useMemo(() => usersData.filter(item => item._id !== userData?._id).slice(0, 5), [usersData])
+
     useEffect(() => {
-        user?._id && dispatch(getMyTags(user?._id))
-    }, [user?._id])
+        userData?._id && dispatch(getMyTags(userData?._id))
+    }, [userData?._id])
     return (
         <div className='layoutContainer'>
-            <SideBar user={user}/>
+            <Suspense fallback={<SmallLoad/>}>
+                <SideBar user={userData}/>
+            </Suspense>
+
             <Outlet/>
-            <RightSide UsersFiltered={UsersFiltered} items={items}/>
+
+            <Suspense fallback={<SmallLoad/>}>
+                <RightSide UsersFiltered={UsersFiltered} items={items}/>
+            </Suspense>
         </div>
     );
 })

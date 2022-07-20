@@ -1,8 +1,8 @@
 import React, {FC, useEffect} from 'react';
 import './myprofile.css'
 import {useTypeDispatch, useTypeSelector} from "../../store/store";
-import {selectorUser} from "../../store/user/selectorsUser";
-import {selectorLikes, selectorUserNewsById} from "../../store/news/selectorsNews";
+import {selectorAllOptionsUser} from "../../store/user/selectorsUser";
+import {likes, newsByUserId} from "../../store/news/selectorsNews";
 import {toast} from "react-toastify";
 import {findLikes, getNewsByUserIdAction} from "../../store/news/newsAction";
 import MyPost from "./MyPost/MyPost";
@@ -12,9 +12,9 @@ import MyFollow from "./MyFollow/MyFollow";
 import {SmallLoad} from "../../ui/LoadingUI";
 
 const MyProfile: FC = () => {
-    const {user, status: userLoad, error} = useTypeSelector(selectorUser)
-    const {data: {items: myPost, status: myPostLoad, error: errorMyPost}} = useTypeSelector(selectorUserNewsById)
-    const {items: myLikesPost, status: likeStatus, error: likeError} = useTypeSelector(selectorLikes)
+    const {user, status: userLoad, error} = useTypeSelector(selectorAllOptionsUser)
+    const {data: {items: myPost, status: myPostLoad, error: errorMyPost}} = useTypeSelector(newsByUserId)
+    const {items: myLikesPost, status: likeStatus, error: likeError} = useTypeSelector(likes)
     const dispatch = useTypeDispatch()
     useEffect(() => {
         error && toast.error(error)

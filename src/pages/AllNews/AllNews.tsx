@@ -8,15 +8,17 @@ import {getAllNewsAction} from "../../store/news/newsAction";
 import {setCurrentPage} from "../../store/news/newsSlice";
 import {useQuery} from "../../utils";
 import {get_all_users} from "../../store/user/userAction";
-import {selectorUser} from "../../store/user/selectorsUser";
-import {selectorAllNews, selectorOptions} from "../../store/news/selectorsNews";
+import {user, users,} from "../../store/user/selectorsUser";
+import {allNews, optionsSelector} from "../../store/news/selectorsNews";
 import {NewsItems, NoNews, Pagination} from "../../component";
 
 
 const AllNews: FC = () => {
-    const {user, users} = useTypeSelector(selectorUser)
-    const {items, status, error} = useTypeSelector(selectorAllNews)
-    const options = useTypeSelector(selectorOptions)
+    const userData = useTypeSelector(user)
+    const usersData = useTypeSelector(users)
+
+    const {items, status, error} = useTypeSelector(allNews)
+    const options = useTypeSelector(optionsSelector)
     const location = useLocation();
     const query = useQuery();
     const navigate = useNavigate()
@@ -41,8 +43,8 @@ const AllNews: FC = () => {
                     <div className='itemNewsContainer'>
                         {items && items.map(item =>
                             <NewsItems dispatch={dispatch}
-                                       users={users}
-                                       user={user}
+                                       users={usersData}
+                                       user={userData}
                                        key={`${item._id}-${item.createdAt}`}
                                        item={item}/>)}
                     </div>

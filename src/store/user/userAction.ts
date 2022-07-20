@@ -48,6 +48,20 @@ export const get_current_user = createAsyncThunk(
         }
     })
 
+export const getUserById = createAsyncThunk<null, string, { rejectValue: KnownError }>(
+    'user/get_user_by_id',
+    async (id, {rejectWithValue}) => {
+        try {
+            const {data} = await api.getUserById(id)
+            return data
+        } catch (err: any) {
+            if (err.response.status === 402 || 403) {
+                return rejectWithValue(err.response.status)
+            }
+            return rejectWithValue(err)
+        }
+    })
+
 
 export const get_all_users = createAsyncThunk(
     'user/get_all_users',

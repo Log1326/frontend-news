@@ -10,6 +10,7 @@ interface Props {
 }
 
 const RightSide: FC<Props> = memo(({items, UsersFiltered}) => {
+
     return (
         <div className='containerRightSide'>
 
