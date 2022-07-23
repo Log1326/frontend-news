@@ -1,28 +1,27 @@
 import React, {FC, FormEvent, useEffect, useRef, useState} from 'react';
-import {AppDispatch, useTypeSelector,} from "../../../store/store";
+import {useTypeSelector} from "../../../store/store";
 import {IMessageData, IOtherData, ISendMessage} from "../../../store/chat/types";
 import {_url, add_message, get_message, getUserById} from "../../../service/api";
-import './chatbox.css'
 import {IUser} from "../../../store/user/types";
-import {ChangeMoment} from "../../../utils";
 import {IoMdSend} from "react-icons/io";
 import {user} from "../../../store/user/selectorsUser";
+import {ChangeMoment} from "../../../utils";
+import './chatbox.css'
 
 interface Props {
     chat: IOtherData | null
     currentUser?: string
-    dispatch: AppDispatch
     receivedMessage: ISendMessage | null
-    setSendMessage: any
+    setSendMessage: ({}:any) => void
 }
 
-const ChatBox: FC<Props> = ({currentUser, chat, dispatch, receivedMessage, setSendMessage}) => {
+
+const ChatBox: FC<Props> = ({currentUser, chat, receivedMessage, setSendMessage}) => {
     const userCurrent = useTypeSelector(user)
     const [userData, setUserData] = useState<IUser | null>(null)
     const [messages, setMessages] = useState<IMessageData[]>([]);
     const [newMessage, setNewMessage] = useState('');
     const scroll = useRef<null | HTMLDivElement>(null);
-
     useEffect(() => {
         const id = chat?.members.find(id => id !== currentUser)
         const getUserData = async () => {
@@ -93,7 +92,7 @@ const ChatBox: FC<Props> = ({currentUser, chat, dispatch, receivedMessage, setSe
                             {messages.map((message) => (
                                 <div key={`${message.chatId}__${message.createdAt}`}>
                                     <div
-                                         className={message.sendId === currentUser ? "message" : "message own"}>
+                                        className={message.sendId === currentUser ? "message" : "message own"}>
                                         <div ref={scroll}>{message.text}</div>
                                         <p>{ChangeMoment(String(message.createdAt))}</p>
                                     </div>

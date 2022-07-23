@@ -1,0 +1,46 @@
+.containerMyPostProfile {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: var(--form-box-shodow);
+    margin-bottom: 1rem;
+    width: 90%;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.itemMyPostProfile {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 1rem;
+    gap: 1rem;
+}
+.itemTitleMyPostProfile{
+    font-size: 2rem;
+    color: var(--color-red-text);
+}
+.likeAndViewProfile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+}
+.threeTouch:hover{
+    color: var(--color-purple);
+    cursor: pointer;
+}
+.threeTouchClose{
+    margin-top: 1rem;
+    display: flex;
+}
+.threeTouchClose:hover{
+    cursor: pointer;
+    color: var(--color-purple);
+}
+.imgControlmyPostProfile {
+    width: 200px;
+    height: 200px;
+    border-radius: 1rem;
+}

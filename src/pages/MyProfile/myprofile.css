@@ -6,3 +6,12 @@
     width: 200px;
     height: 200px;
 }
+
+.activityProfileTitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: black;
+    margin: 1rem;
+}

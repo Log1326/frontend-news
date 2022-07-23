@@ -7,9 +7,9 @@ import {toast} from "react-toastify";
 import {findLikes, getNewsByUserIdAction} from "../../store/news/newsAction";
 import MyPost from "./MyPost/MyPost";
 import MyInfo from "./MyInfo/MyInfo";
-import MyLikePost from "./MyLikePost/MyLikePost";
-import MyFollow from "./MyFollow/MyFollow";
 import {SmallLoad} from "../../ui/LoadingUI";
+import Followers from "./Followers/Followers";
+import Following from "./Following/Following";
 
 const MyProfile: FC = () => {
     const {user, status: userLoad, error} = useTypeSelector(selectorAllOptionsUser)
@@ -25,13 +25,22 @@ const MyProfile: FC = () => {
         user?._id && dispatch(getNewsByUserIdAction({userId: user?._id}))
         user?._id && dispatch(findLikes({userId: user?._id}))
     }, [user?._id])
+
     return (
         <div className='container'>
-            <div>{userLoad === 'loading' ? <SmallLoad/> : <MyInfo user={user}/>}</div>
+            <div>{userLoad === 'loading' ?
+                <SmallLoad/>
+                :
+                <div>
+                    <MyInfo user={user}/>
+                </div>
+            }
+            </div>
             <div>
                 {myPostLoad === 'loading' ? <SmallLoad/>
                     :
                     <div>
+                        <span className='activityProfileTitle'>My Post</span>
                         {myPost && myPost.map((item, index) =>
                             <MyPost item={item} key={`${item._id}__${index + 123}`}/>)}
                     </div>
@@ -41,8 +50,9 @@ const MyProfile: FC = () => {
                 {likeStatus === 'loading' ? <SmallLoad/>
                     :
                     <div>
+                        <span className='activityProfileTitle'>My Like Posts</span>
                         {myLikesPost && myLikesPost?.map((item, index) =>
-                            <MyLikePost item={item} key={item._id + index}/>)}
+                            <MyPost item={item} key={item._id + index}/>)}
                     </div>
                 }
             </div>
@@ -50,19 +60,22 @@ const MyProfile: FC = () => {
                 {userLoad === 'loading' ? <SmallLoad/>
                     :
                     <div>
-                        {user?.followers && user?.followers.map(item =>
-                            <MyFollow item={item} follow={true}/>
-                        )}
-                    </div>
-                }
-            </div>
-            <div>
-                {userLoad === 'loading' ? <SmallLoad/>
-                    :
-                    <div>
-                        {user?.following && user?.following.map(item =>
-                            <MyFollow item={item} follow={false}/>
-                        )}
+                        <div>
+                            <span>My Followers</span>
+                            <div>
+                                {user?.followers && user?.followers.map(item =>
+                                    <Followers item={item}/>
+                                )}
+                            </div>
+                        </div>
+                        <div>
+                            <span>My Following</span>
+                            <div>
+                                {user?.following && user?.following.map(item =>
+                                    <Following item={item}/>
+                                )}
+                            </div>
+                        </div>
                     </div>
                 }
             </div>

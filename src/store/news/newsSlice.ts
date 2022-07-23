@@ -11,9 +11,9 @@ import {
 
 const initialState: newsStateNews = {
     oneNewsById: {
-            items: [],
-            status: null,
-            error: null,
+        items: [],
+        status: null,
+        error: null,
     },
     allNews: {
         items: [],
@@ -117,7 +117,7 @@ const newsSlice = createSlice({
                 userNewsById.data.status = statusLoading.loading
                 userNewsById.data.error = null
             })
-            .addCase(likesNews.pending, ({allNews,oneNewsById, tagsNews}) => {
+            .addCase(likesNews.pending, ({allNews, oneNewsById, tagsNews}) => {
                 allNews.error = null
                 oneNewsById.error = null
                 tagsNews.error = null
@@ -191,7 +191,6 @@ const newsSlice = createSlice({
             .addCase(updateNewsAction.pending, ({userNewsById}) => {
                 userNewsById.data.error = null
                 userNewsById.data.status = statusLoading.loading
-
             })
             .addCase(updateNewsAction.fulfilled, ({userNewsById}) => {
                 userNewsById.data.error = null

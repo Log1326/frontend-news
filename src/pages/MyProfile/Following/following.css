@@ -1,0 +1,16 @@
+.containerFollowing {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: var(--form-box-shodow);
+    width: 20%;
+    border-radius: 2rem;
+    margin: 1rem;
+    padding: 1rem;
+}
+
+.imgFollowing {
+    width: 100px;
+    height: 100px;
+    border-radius: 1rem;
+}

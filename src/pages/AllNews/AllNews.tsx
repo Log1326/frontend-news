@@ -36,6 +36,7 @@ const AllNews: FC = () => {
     useEffect(() => {
         dispatch(get_all_users())
     }, [])
+
     return (
         <div className='containerAllNews'>
             {status === 'loading' ? <SkeletonLoad/> :

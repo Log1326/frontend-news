@@ -1,4 +1,4 @@
-import React, {FC, memo, useCallback} from 'react';
+import React, {FC, memo} from 'react';
 import './mynewsdesc.css'
 import {INews} from "../../store/news/types";
 import {NavLink} from "react-router-dom";
@@ -13,8 +13,6 @@ interface Props {
 
 
 const MyNewsDesk: FC<Props> = memo(({item, handleRemove, handleUpdate}) => {
-    const edit = useCallback(() => handleUpdate(item._id), [handleUpdate])
-    const remove = useCallback(() => handleRemove(item._id), [handleRemove])
     return (
         <div className='containerMyNewsDesc'>
             <div className='itemMyNews'>
@@ -47,8 +45,8 @@ const MyNewsDesk: FC<Props> = memo(({item, handleRemove, handleUpdate}) => {
             </div>
 
             <div className='buttonStyles'>
-                <span onClick={edit}>edit</span>
-                <span onClick={remove}>remove</span>
+                <span onClick={() => handleUpdate(item._id)}>edit</span>
+                <span onClick={() => handleRemove(item._id)}>remove</span>
             </div>
         </div>
     );

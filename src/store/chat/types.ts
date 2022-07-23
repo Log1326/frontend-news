@@ -83,3 +83,16 @@ export interface IFindChat {
     firstId: string
     secondId: string
 }
+
+
+export interface IOnline {
+    socketId: string
+    userId: string
+}
+
+export interface IReceiveMessage {
+    chatId: string
+    receiveId: string
+    sendId: string
+    text: string
+}

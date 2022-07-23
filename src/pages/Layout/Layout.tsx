@@ -14,14 +14,13 @@ const Layout: FC = memo(() => {
     const userData = useTypeSelector(user)
     const usersData = useTypeSelector(users)
     const {items} = useTypeSelector(myTags)
-
     const dispatch = useTypeDispatch()
 
     const UsersFiltered = useMemo(() => usersData.filter(item => item._id !== userData?._id).slice(0, 5), [usersData])
-
     useEffect(() => {
         userData?._id && dispatch(getMyTags(userData?._id))
     }, [userData?._id])
+
     return (
         <div className='layoutContainer'>
             <Suspense fallback={<SmallLoad/>}>

@@ -13,13 +13,12 @@ import {newsByUserId} from "../../store/news/selectorsNews";
 const MyNewsDesk: FC = () => {
     const userData = useTypeSelector(user)
     const {data, options} = useTypeSelector(newsByUserId)
-    const {items, status, error} = data
     const navigate = useNavigate()
     const page: number | null = options.currentPage !== null ? options.currentPage : 1
     const dispatch = useTypeDispatch()
     useEffect(() => {
-        error && toast.error(error)
-    }, [error])
+        data.error && toast.error(data.error)
+    }, [data.error])
     useEffect(() => {
         userData?._id && dispatch(getNewsByUserIdAction({userId: userData?._id, page}))
     }, [userData?._id])
@@ -30,18 +29,22 @@ const MyNewsDesk: FC = () => {
     const handleRemove = (id: string) => dispatch(removeNewsAction({id, toast}))
     return (
         <div className='containerMyNews'>
-            {status === 'loading' ?
+            {data.status === 'loading' ?
                 <BigLoad/>
                 :
                 <>
                     <div>
-                        {items && items?.map(item => <MyNewsDesc handleRemove={handleRemove} handleUpdate={handleUpdate}
-                                                                 item={item} key={item.createdAt + item._id}/>)}
+                        {data.items && data.items?.map(item =>
+                            <MyNewsDesc handleRemove={handleRemove}
+                                        handleUpdate={handleUpdate}
+                                        item={item}
+                                        key={item.createdAt + item._id}/>
+                        )}
                     </div>
                     <div>
-                        {items?.length === 0 && <NoNews>There are not your news</NoNews>}
+                        {data.items?.length === 0 && <NoNews>There are not your news</NoNews>}
                     </div>
-                    {items && items?.length > 0 &&
+                    {data.items && data.items?.length > 0 &&
                         <div className='paginationPositionMyNews'>
                             <Pagination setCurrentPage={setCurrentPageByUser} options={options} dispatch={dispatch}/>
                         </div>

@@ -1,27 +1,25 @@
 import React, {FC, useEffect, useRef, useState} from 'react';
 import './chat.css'
-import {useTypeDispatch, useTypeSelector} from "../../store/store";
+import {useTypeSelector} from "../../store/store";
 import Conversation from "./Conversation/Conversation";
 import {user} from "../../store/user/selectorsUser";
 import ChatBox from "./ChatBox/ChatBox";
 import {io, Socket} from "socket.io-client";
-import {IOtherData} from "../../store/chat/types";
-import {IUsers} from '../../store/user/types'
+import {IMessageData, IOnline, IOtherData, IReceiveMessage} from "../../store/chat/types";
 import {user_chat} from "../../service/api";
-interface IOnline{
-    socketId: string
-    userId: string
-}
+
+
 const Chat: FC = () => {
     const userData = useTypeSelector(user)
+    const socket = useRef<Socket>();
+
+
     const [chats, setChats] = useState<IOtherData[]>([]);
     const [currentChat, setCurrentChat] = useState<IOtherData | null>(null);
-    const [sendMessage, setSendMessage] = useState(null);
-    const [receivedMessage, setReceivedMessage] = useState(null);
-    const [onlineUsers, setOnlineUsers] = useState<IUsers[]>([]);
+    const [sendMessage, setSendMessage] = useState<IMessageData | null>(null);
+    const [receivedMessage, setReceivedMessage] = useState<IReceiveMessage | null>(null);
+    const [onlineUsers, setOnlineUsers] = useState<IOnline[]>([]);
 
-    const socket = useRef<Socket>();
-    const dispatch = useTypeDispatch()
     useEffect(() => {
         const getChats = async () => {
             try {
@@ -39,8 +37,7 @@ const Chat: FC = () => {
     useEffect(() => {
         socket.current = io("http://localhost:4500");
         socket.current.emit("new-user-add", userData?._id);
-        socket.current.on("get-users", (users: any) => {
-            console.log(users)
+        socket.current.on("get-users", (users) => {
             setOnlineUsers(users);
         });
     }, [userData]);
@@ -53,17 +50,16 @@ const Chat: FC = () => {
 // Получаем сообщение от сокет-сервера
     useEffect(() => {
         socket?.current?.on("recieve-message", (data) => {
-            console.log(data)
             setReceivedMessage(data)
         })
     }, [sendMessage]);
 
-    const checkOnlineStatus = (item: any) => {
-        const chatMember = item.members.find((member:any) => member !== userData?._id);
-        const online = onlineUsers.find((user: any) => user.userId === chatMember);
+    const checkOnlineStatus = (item: IOtherData): boolean => {
+        const chatMember = item.members.find((member: string) => member !== userData?._id);
+        const online = onlineUsers.find((user) => user.userId === chatMember);
         return !!online;
     };
-
+    console.log(sendMessage)
     return (
         <div className='containerChat'>
             {/*Chats People*/}
@@ -83,7 +79,6 @@ const Chat: FC = () => {
                 <div className='containerMessage'>
                     <ChatBox
                         setSendMessage={setSendMessage}
-                        dispatch={dispatch}
                         receivedMessage={receivedMessage}
                         chat={currentChat}
                         currentUser={userData?._id}/>
